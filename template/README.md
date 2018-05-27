@@ -1,10 +1,8 @@
 # 后台管理
 
+## 框架目录说明
 
-
-## 框架目录说明 
-
- ```cmd
+```cmd
 ├─build       #webpack构建配置文件
 ├─config      #全局构建配置文件
 ├─src         #项目核心源文件
@@ -19,11 +17,28 @@
 │      └─user  #模块划分
 ```
 
-
-
 ## 特别注意事项！
- * 请注意route.js导入Vue组件的路径大小写问题, 如果vue页面在目录命名是大写,import时也必须是大写。否则会引起服务器打包构建失败。
- * 如果需要在npm仓库添加插件时,请务必使用 npm -S 命令保证package.json文件有添加相关依赖
 
+* 请注意 route.js 导入 Vue 组件的路径大小写问题, 如果 vue 页面在目录命名是大写,import 时也必须是大写。否则会引起服务器打包构建失败。
+* 如果需要在 npm 仓库添加插件时,请务必使用 npm -S 命令保证 package.json 文件有添加相关依赖
 
+### 贡献代码的步骤
 
+* 在贡献代码之前，你需要 fork 该项目到自己的 github 中，git 项目的地址是 https://github.com/szdankal/web-admin-template.git
+
+* 接着你只需要到 template 下，编码项目即可
+
+### 权限设计说明
+
+*
+
+### 组件说明
+
+> side-bar 说明
+
+* 使用动态组件完成对应模块的挂载
+* 设计存在两个对应的 slot, 一个是用于定制商标的， 一个是用于存放动态模块的
+
+> table-pagination 说明
+
+> quill-editor 说明
