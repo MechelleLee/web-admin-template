@@ -11,7 +11,7 @@ const dkAxios = axios.create({
 let loading
 dkAxios.interceptors.request.use(function (config) {
   // 访问网络时加载loading,防止用户多次操作
-  config.header={token:utils.getCookie("projectName_token")}
+  config.headers={token:utils.getCookie("projectName_token")}
   loading = vm.$loading({
     lock: true,
     text: 'Loading',
