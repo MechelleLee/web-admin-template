@@ -11,6 +11,7 @@
       </top-bar>
     </el-header>
     <el-main class="page-content">
+      <!-- 建议使用 router-view -->
       <router-view></router-view>
     </el-main>
   </el-container>

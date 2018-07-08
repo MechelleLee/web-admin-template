@@ -6,11 +6,7 @@
           <img src="../assets/images/ent-logo.png">
           <span>DanKal后台管理</span>
         </div>
-        <!-- 仅使用 sessionStorage 版本 -->
-        <!-- <div slot="router">
-          <component v-for="item in authority" :key="item" :is="item"></component>
-        </div> -->
-        <!-- 仅使用 vuex 和 sessionStorage 结合的版本 -->
+        <!-- 仅使用 vuex， 动态加载对应的权限模块 -->
         <div slot="router">
           <component v-for="item in getAuthority" :key="item" :is="item"></component>
         </div>
@@ -45,20 +41,11 @@ export default {
     Example,
   },
 
-  created() {
-    this.recoveryAuthority();
-
-    // sessionStorage 获取权限表
-    // const cache = window.sessionStorage.getItem('authority');
-    // if (!cache) return;
-    // this.authority = cache.split(',');
-  },
+  created() {},
 
   mounted() {},
 
   methods: {
-    ...mapActions(['recoveryAuthority']),
-
     event() {
       let self = this;
       return {
@@ -84,6 +71,7 @@ export default {
   watch: {},
 
   computed: {
+    // 获取权限表
     ...mapGetters(['getAuthority']),
   },
 };

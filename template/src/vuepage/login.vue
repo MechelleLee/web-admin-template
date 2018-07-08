@@ -55,19 +55,14 @@ export default {
         },
 
         onLogin() {
+          //写入权限表
+          self.initialAuthority(['dynamic', 'example']);
+
+          router(self.$router, '/authority-management');
+
           self.$router.push({
             path: 'index',
           });
-
-          window.sessionStorage.setItem('login', true);
-
-          self.initialAuthority(['dynamic', 'example']);
-
-          // sessionStorage 存储权限表
-          // const authority = ['dynamic', 'example'];
-          // window.sessionStorage.setItem('authority', authority.join[',']);
-
-          router(self.$router, '/authority-management');
         },
       };
     },
@@ -134,7 +129,6 @@ export default {
 
 .edit-box .icon {
   width: 22px;
-  height: 22px;
   margin-right: 20px;
 }
 
