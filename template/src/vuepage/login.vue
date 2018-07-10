@@ -57,9 +57,10 @@ export default {
         onLogin() {
           //写入权限表
           self.initialAuthority(['dynamic', 'example']);
-
+          // 需要注意这里的默认路由推入vuex进行缓存, 注意需要在App.vue进行恢复
+          self.$store.commit('setRouter', '/authority-management');
+          // 设置index 对应的默认路由
           router(self.$router, '/authority-management');
-
           self.$router.push({
             path: 'index',
           });

@@ -16,12 +16,17 @@ body {
 <script>
 import router from '@/router/build.js';
 
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'app',
 
   created() {
-    if (window.sessionStorage.getItem('login'))
-      router(this.$router, '/authority-management');
+    router(this.$router, this.getRouter);
+  },
+
+  computed: {
+    ...mapGetters(['getRouter']),
   },
 };
 </script>

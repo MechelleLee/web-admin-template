@@ -4,6 +4,8 @@ import * as mutations from './mutations';
 
 const state = {
   authority: [],
+  // 默认恢复路由
+  router: '',
 };
 
 export default {

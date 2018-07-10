@@ -41,10 +41,6 @@ export default {
     Example,
   },
 
-  created() {},
-
-  mounted() {},
-
   methods: {
     event() {
       let self = this;
