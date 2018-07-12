@@ -10,10 +10,6 @@ export default [
     children: [
       {
         path: '',
-        redirect: 'example-list',
-      },
-      {
-        path: 'example-list',
         component: ExampleList,
         meta: [
           {

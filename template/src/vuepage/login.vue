@@ -5,21 +5,36 @@
         <p class="title">登录</p>
       </div>
       <div class="edit-box">
-        <img class="icon" src="../assets/images/ic_login_account.png">
-        <input class="input" placeholder="账号" />
+        <img class="icon"
+             src="../assets/images/ic_login_account.png">
+        <input class="input"
+               placeholder="账号" />
       </div>
       <div class="edit-box">
-        <img class="icon" src="../assets/images/ic_login_password.png">
-        <input class="input" type="password" placeholder="密码" />
+        <img class="icon"
+             src="../assets/images/ic_login_password.png">
+        <input class="input"
+               type="password"
+               placeholder="密码" />
       </div>
       <div class="verify-box">
-        <div class="edit-box" style="width: 40%;margin: 0;float: left">
-          <img class="icon" src="../assets/images/ic_login_check_code.png">
-          <input class="input" style="width: 0" placeholder="验证码" maxlength="4" />
+        <div class="edit-box"
+             style="width: 40%;margin: 0;float: left">
+          <img class="icon"
+               src="../assets/images/ic_login_check_code.png">
+          <input class="input"
+                 style="width: 0"
+                 placeholder="验证码"
+                 maxlength="4" />
         </div>
-        <img class="img-verify" arc="code" id="code" @click="event().onVerifyImgClicked()">
+        <img class="img-verify"
+             arc="code"
+             id="code"
+             @click="event().onVerifyImgClicked()">
       </div>
-      <el-button type="primary" class="login-btn" @click="event().onLogin()">登录</el-button>
+      <el-button type="primary"
+                 class="login-btn"
+                 @click="event().onLogin()">登录</el-button>
     </div>
   </div>
 </template>
@@ -30,6 +45,9 @@ require('@/jslib/verify-code');
 import { mapGetters, mapActions } from 'vuex';
 
 import router from '@/router/build.js';
+
+// 路由权限配置模块
+import config from '../router/config.js';
 
 export default {
   data() {
@@ -55,12 +73,17 @@ export default {
         },
 
         onLogin() {
+          // 获取配置的权限表,
+          let authortity = Object.keys(config);
+          // 获取配置的权限所对应的路由
+          let routers = Object.values(config).map(item => item.router);
           //写入权限表
-          self.initialAuthority(['dynamic', 'example']);
+          self.initialAuthority(authortity);
           // 需要注意这里的默认路由推入vuex进行缓存, 注意需要在App.vue进行恢复
           self.$store.commit('setRouter', '/authority-management');
-          // 设置index 对应的默认路由
-          router(self.$router, '/authority-management');
+          // self.$store.commit('setRouters', routers);
+          // 设置index 对应的默认路由，和路由表，注意需要在App.vue进行恢复
+          router(self.$router, '/authority-management', routers);
           self.$router.push({
             path: 'index',
           });
