@@ -6,6 +6,7 @@ const state = {
   authority: [],
   // 默认恢复路由
   router: '',
+  routers: [],
 };
 
 export default {

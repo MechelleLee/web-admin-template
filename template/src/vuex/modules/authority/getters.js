@@ -5,3 +5,7 @@ export const getAuthority = state => {
 export const getRouter = state => {
   return state.router;
 };
+
+export const getRouters = (state) => {
+  return state.routers;
+}

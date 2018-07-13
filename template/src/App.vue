@@ -17,16 +17,20 @@ body {
 import router from '@/router/build.js';
 
 import { mapGetters } from 'vuex';
+// 路由权限配置模块
+import config from './router/config.js';
 
 export default {
   name: 'app',
 
   created() {
-    router(this.$router, this.getRouter);
+    // 获取配置的权限所对应的路由
+    let routers = Object.values(config).map(item => item.router);
+    router(this.$router, this.getRouter, routers);
   },
 
   computed: {
-    ...mapGetters(['getRouter']),
+    ...mapGetters(['getRouter', 'getRouters']),
   },
 };
 </script>
