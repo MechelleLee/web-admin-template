@@ -1,5 +1,5 @@
-import authority from "./authority";
-import example from "./example";
+import authority from './authority';
+import example from './example';
 
 // 配置权限表的时候，建议与动态组件的名称保持一致
 // 配置使用Key：Value结构，
@@ -8,16 +8,16 @@ import example from "./example";
 // 来方便过滤出你权限对应的模块
 
 const auth = {
-  'dynamic': {
+  dynamic: {
     serial: 'dankal-dynamic',
     router: authority,
     component: 'dynamic',
   },
-  'example': {
+  example: {
     serial: 'dankal-example',
     router: example,
     component: 'example',
   },
-}
+};
 
 export default auth;

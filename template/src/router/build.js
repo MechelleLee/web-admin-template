@@ -6,7 +6,6 @@ const Index = () => import('@/vuepage/Index');
  * @param {*} initial 指定默认跳转的路由
  */
 export default (router, initial, authority) => {
-
   const children = [
     {
       path: '',
