@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  *
  * @param {*} obj 被检查对象

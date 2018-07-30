@@ -1,11 +1,5 @@
-export const getAuthority = state => {
-  return state.authority;
-};
+export const getAuthority = state => state.authority;
 
-export const getRouter = state => {
-  return state.router;
-};
+export const getRouter = state => state.router;
 
-export const getRouters = (state) => {
-  return state.routers;
-}
+export const getRouters = state => state.routers

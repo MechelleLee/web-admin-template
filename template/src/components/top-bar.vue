@@ -1,19 +1,24 @@
 <template>
   <div class="header-container">
     <div class="router-view">
-      <el-breadcrumb separator-class="el-icon-arrow-right" separator=">">
-        <el-breadcrumb-item v-for="(item, index) in $route.meta" :key="index">
-          <span @click="changeRouter(item.url)"> {{item.name}}</span>
+      <el-breadcrumb
+        separator-class="el-icon-arrow-right"
+        separator=">">
+        <el-breadcrumb-item
+          v-for="(item, index) in $route.meta"
+          :key="index">
+          <span @click="changeRouter(item.url)"> {{ item.name }}</span>
         </el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="filter-view">
-      <slot name="filter"></slot>
+      <slot name="filter"/>
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   data() {
     return {};

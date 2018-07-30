@@ -4,17 +4,28 @@
       <top-bar>
         <div slot="filter">
           <el-input placeholder="请输入手机号码、用户名">
-            <el-button slot="append" icon="el-icon-search"></el-button>
+            <el-button
+              slot="append"
+              icon="el-icon-search"/>
           </el-input>
         </div>
       </top-bar>
     </el-header>
     <el-main class="page-content">
-      <dk-table :data="tableData" :fields="fields">
-        <el-table-column fixed="right" label="操作" width="250">
+      <dk-table
+        :data="tableData"
+        :fields="fields">
+        <el-table-column
+          fixed="right"
+          label="操作"
+          width="250">
           <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" size="mini">编辑</el-button>
-            <el-button size="mini" @click="isShowAuthDialog=true">查看权限</el-button>
+            <el-button
+              @click="handleClick(scope.row)"
+              size="mini">编辑</el-button>
+            <el-button
+              size="mini"
+              @click="isShowAuthDialog=true">查看权限</el-button>
             <el-button size="mini">删除</el-button>
           </template>
         </el-table-column>
@@ -26,6 +37,7 @@
 
 <script>
 import dkTable from '../../components/dk-table';
+
 export default {
   methods: {
     handleClick(row) {
