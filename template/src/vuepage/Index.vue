@@ -5,8 +5,8 @@
         <div
           slot="trademark"
           class="title-box">
-          <img src="../assets/images/ent-logo.png">
-          <span>DanKal后台管理</span>
+          <img src="../assets/images/pic_logo2.png">
+          <!-- <span>DanKal后台管理</span> -->
         </div>
         <div slot="router">
           <component
@@ -46,6 +46,7 @@ export default {
   },
   created() {
     const encryptedPermission = sessionStorage.getItem('permission')
+    // 解码并转换成对象格式
     this.permissionList = JSON.parse(decrypt(encryptedPermission))
   },
   mounted() {

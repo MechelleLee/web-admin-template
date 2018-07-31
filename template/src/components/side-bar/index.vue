@@ -5,9 +5,9 @@
         :default-active="$route.path"
         :router="routerMode"
         class="el-menu-vertical-demo full-height"
-        background-color="#304156"
-        text-color="#bfcbd9"
-        active-text-color="#409EFF"
+        background-color="#141414"
+        text-color="#666666"
+        active-text-color="#ffffff"
       >
         <slot name="trademark"/>
         <slot name="router"/>

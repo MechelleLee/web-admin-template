@@ -1,6 +1,8 @@
 <template>
   <el-container class="full-height bg-gray">
-    <el-header class="no-padding">
+    <el-header
+      class="no-padding"
+      style="height:73px">
       <top-bar>
         <!--通过slot拓展的筛选项-->
         <div slot="filter">

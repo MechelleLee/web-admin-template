@@ -1,6 +1,8 @@
 <template>
   <el-container class="full-height bg-gray">
-    <el-header class="no-padding">
+    <el-header
+      class="no-padding"
+      style="height:73px">
       <top-bar>
         <div slot="filter">
           <el-input placeholder="请输入手机号码、用户名">
