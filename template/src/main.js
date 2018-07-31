@@ -34,3 +34,4 @@ window.vm = new Vue({
   template: '<App/>',
   components: { App },
 });
+/* eslint-disable no-new */

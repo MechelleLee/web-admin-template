@@ -11,6 +11,7 @@ export const pms2MenuList = (permissionList) => {
   const sideMemuList = []
 
   permissionList.forEach((value) => {
+    console.log(value, '*-*-*-*-*/*/*/*/*/*/+/+/+/')
     const menuItem = PermissionMapper.get(value.name)
     if (value.children && Array.isArray(value.children) && value.children.length) {
       const { children } = value
