@@ -1,17 +1,5 @@
 <template>
   <el-container class="full-height bg-gray">
-    <el-header
-      class="no-padding"
-      style="height:73px">
-      <top-bar>
-        <!--通过slot拓展的筛选项-->
-        <div slot="filter">
-          <el-button>1</el-button>
-          <el-button>2</el-button>
-          <el-button>3</el-button>
-        </div>
-      </top-bar>
-    </el-header>
     <el-main class="page-content">
       <!-- 建议使用 router-view -->
       <router-view/>

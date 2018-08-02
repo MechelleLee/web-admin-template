@@ -14,9 +14,6 @@
         </el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <div class="filter-view">
-      <slot name="filter"/>
-    </div>
     <div class="admin-right">
       <img
         class="admin-head"

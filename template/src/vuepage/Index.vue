@@ -18,6 +18,7 @@
       </side-bar>
     </el-aside>
     <el-main class="no-padding">
+      <top-bar/>
       <router-view/>
     </el-main>
   </el-container>
