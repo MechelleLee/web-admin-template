@@ -25,6 +25,7 @@
 </template>
 
 <script>
+
 import dkTable from '../../components/dk-table';
 
 export default {
@@ -35,6 +36,11 @@ export default {
   },
   components: {
     dkTable,
+  },
+  computed: {
+    name() {
+      return this.$store.state.users.name
+    },
   },
   data() {
     return {
