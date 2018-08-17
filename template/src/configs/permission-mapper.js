@@ -16,6 +16,14 @@ const list = [
       route: '/example-management/multiple-download',
     },
   },
+  {
+    name: '操作权限控制',
+    menuItem: {
+      name: '操作权限控制',
+      iconClass: 'el-icon-setting',
+      route: '/example-management/operation',
+    },
+  },
 ]
 
 const mapper = new Map()
