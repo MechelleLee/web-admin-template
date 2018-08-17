@@ -3,7 +3,6 @@ import Router from 'vue-router';
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css'
 import Example from '@/router/example'
-import Authority from '@/router/authority'
 // progress bar style
 NProgress.configure({ showSpinner: false });
 
@@ -12,7 +11,7 @@ const Index = () => import('@/vuepage/Index');
 const children = [{
   path: '',
   redirect: '/example-management',
-}].concat(...Example, ...Authority)
+}].concat(...Example)
 console.log(Example)
 Vue.use(Router);
 

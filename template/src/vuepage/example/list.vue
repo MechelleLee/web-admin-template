@@ -54,9 +54,6 @@ export default {
   components: {
     TablePagination,
   },
-
-  mounted() {},
-
   methods: {
     // eslint-disable-next-line no-unused-vars
     handlerPageChange(data) {

@@ -8,14 +8,12 @@ import 'element-ui/lib/theme-chalk/index.css';
 import TopBar from './components/top-bar';
 // vuex 配置
 import store from './vuex/store';
-
 // quill 富文本编辑器
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
 
 require('./filters/vue-filiter')
-
 require('./jslib/verify-code.min');
 
 Vue.config.productionTip = false;

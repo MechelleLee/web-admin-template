@@ -8,6 +8,7 @@
 
 <script>
 import QuillEditor from '@/components/quill-editor';
+import Mixins from '@/mixins/operations'
 
 export default {
   data() {
@@ -15,12 +16,10 @@ export default {
       html: '<p>测试</p>',
     };
   },
-
+  mixins: [Mixins],
   components: {
     QuillEditor,
   },
-
-  mounted() {},
 
   methods: {
     handlerTextPage(data) {
