@@ -6,7 +6,7 @@ import Example from '@/router/example'
 // progress bar style
 NProgress.configure({ showSpinner: false });
 
-const Login = () => import('@/vuepage/Login');
+const Login = () => import('@/vuepage/login');
 const Index = () => import('@/vuepage/Index');
 const children = [{
   path: '',
