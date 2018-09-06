@@ -1,11 +1,14 @@
 <template>
   <section class="container">
-    <quill-editor v-model="html" @change="handlerTextPage"></quill-editor>
+    <quill-editor
+      v-model="html"
+      @change="handlerTextPage"/>
   </section>
 </template>
 
 <script>
 import QuillEditor from '@/components/quill-editor';
+import Mixins from '@/mixins/operations'
 
 export default {
   data() {
@@ -13,12 +16,10 @@ export default {
       html: '<p>测试</p>',
     };
   },
-
+  mixins: [Mixins],
   components: {
     QuillEditor,
   },
-
-  mounted() {},
 
   methods: {
     handlerTextPage(data) {
@@ -29,6 +30,7 @@ export default {
   },
 
   watch: {
+    // eslint-disable-next-line no-unused-vars
     html(nv, ov) {
       console.log('====================================');
       console.log(nv);
