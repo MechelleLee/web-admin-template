@@ -2,62 +2,73 @@
   <el-container class="full">
     <el-aside width="200px">
       <side-bar>
-        <div slot="trademark" class="title-box">
-          <img src="../assets/images/ent-logo.png">
-          <span>DanKal后台管理</span>
+        <div
+          slot="trademark"
+          class="title-box">
+          <img src="../assets/images/pic_logo2.png">
+          <!-- <span>DanKal后台管理</span> -->
         </div>
-        <!-- 仅使用 vuex， 动态加载对应的权限模块 -->
         <div slot="router">
-          <component v-for="item in getAuthority" :key="item" :is="item"></component>
+          <component
+            v-for="item in menuList"
+            :key="item.name"
+            :data="item"
+            :is="item.children?'sub-menu':'menu-item'"/>
         </div>
       </side-bar>
     </el-aside>
     <el-main class="no-padding">
+      <top-bar/>
       <router-view/>
     </el-main>
   </el-container>
 </template>
 <script>
+/* eslint-disable space-infix-ops */
+
 import TopBar from '../components/top-bar';
 import SideBar from '../components/side-bar';
-
-//  动态路由组件
-import Dynamic from '../components/side-bar/dynamic';
-import Example from '../components/side-bar/example';
-
-import { mapGetters, mapActions } from 'vuex';
+import MenuItem from '../components/side-bar/menu-item'
+import SubMenu from '../components/side-bar/sub-menu'
+import { pms2MenuList, decrypt } from '../filters/filter'
 
 export default {
   data() {
     return {
-      authority: [],
+      permissionList: [],
+      menuList: [],
     };
   },
-
   components: {
     TopBar,
     SideBar,
-    Dynamic,
-    Example,
+    MenuItem,
+    SubMenu,
   },
-
+  created() {
+    const encryptedPermission = sessionStorage.getItem('permission')
+    // 解码并转换成对象格式
+    this.permissionList = JSON.parse(decrypt(encryptedPermission))
+  },
+  mounted() {
+    this.menuList = pms2MenuList(this.permissionList)
+  },
   methods: {
     event() {
-      let self = this;
       return {
         onClick() {},
       };
     },
 
     network() {
-      let self = this;
       return {
-        getListA() {},
+        getListA() {
+
+        },
       };
     },
 
     handler() {
-      let self = this;
       return {
         handleListA() {},
       };
@@ -66,10 +77,6 @@ export default {
 
   watch: {},
 
-  computed: {
-    // 获取权限表
-    ...mapGetters(['getAuthority']),
-  },
 };
 </script>
 

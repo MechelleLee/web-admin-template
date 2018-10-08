@@ -1,21 +1,42 @@
 <template>
   <section class="container">
-    <el-table :data="datasource.data" border style="width: 100%">
-      <el-table-column v-if="!_config.index" fixed type="index" :index="handlerSerial" label="ID" align="center">
-      </el-table-column>
-      <el-table-column v-for="(item,index) in _config.fields" :key="index" :prop="item.prop" :label="item.label"></el-table-column>
+    <el-table
+      :data="datasource.data"
+      border
+      style="width: 100%">
+      <el-table-column
+        v-if="!_config.index"
+        fixed
+        type="index"
+        :index="handlerSerial"
+        label="ID"
+        align="center"/>
+      <el-table-column
+        v-for="(item,index) in _config.fields"
+        :key="index"
+        :prop="item.prop"
+        :label="item.label"/>
       <!-- 数据处理插槽 -->
-      <slot name="filter"></slot>
+      <slot name="filter"/>
       <!-- 操作栏插槽   -->
-      <slot name="action"></slot>
+      <slot name="action"/>
     </el-table>
-    <el-pagination v-if="_config.pagination" ref="pagination" :page-size="_config.size" :current-page="page" background layout="prev, pager, next" :total="datasource.total" @current-change="handlerChange">
-    </el-pagination>
+    <el-pagination
+      v-if="_config.pagination"
+      ref="pagination"
+      :page-size="_config.size"
+      :current-page="page"
+      background
+      layout="prev, pager, next"
+      :total="datasource.total"
+      @current-change="handlerChange"/>
   </section>
 </template>
 
 <script>
-import object from '../jslib/object.js';
+/* eslint-disable vue/no-reserved-keys,no-underscore-dangle */
+
+import object from '../jslib/object';
 
 export default {
   data() {
@@ -28,32 +49,24 @@ export default {
   props: {
     config: {
       type: Object,
-      default: () => {
-        return {
-          pagination: true,
-          size: 10,
-          index: true,
-          fields: [],
-        };
-      },
+      default: () => ({
+        pagination: true,
+        size: 10,
+        index: true,
+        fields: [],
+      }),
       // 用于校验必传配置
-      validator: value => {
-        return object.isComplete(value, ['fields']);
-      },
+      validator: value => object.isComplete(value, ['fields']),
     },
     datasource: {
       type: Object,
-      default: () => {
-        return {
-          total: 0,
-          data: [],
-        };
-      },
+      default: () => ({
+        total: 0,
+        data: [],
+      }),
       required: true,
       // 用于校验必传配置
-      validator: value => {
-        return object.isComplete(value, ['total', 'data']);
-      },
+      validator: value => object.isComplete(value, ['total', 'data']),
     },
   },
 
@@ -88,8 +101,8 @@ export default {
       });
     },
     handlerSerial(index) {
-      let size = this.config.size;
-      let page = this.page;
+      const { size } = this.config;
+      const { page } = this;
       return (page - 1) * size + (index + 1);
     },
   },
@@ -114,4 +127,3 @@ export default {
   }
 }
 </style>
-

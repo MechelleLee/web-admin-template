@@ -1,6 +1,8 @@
 <template>
   <section class="container">
-    <quill-editor v-model="html" @change="handlerTextPage"></quill-editor>
+    <quill-editor
+      v-model="html"
+      @change="handlerTextPage"/>
   </section>
 </template>
 
@@ -29,6 +31,7 @@ export default {
   },
 
   watch: {
+    // eslint-disable-next-line no-unused-vars
     html(nv, ov) {
       console.log('====================================');
       console.log(nv);

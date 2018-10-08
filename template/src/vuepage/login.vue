@@ -1,40 +1,85 @@
 <template>
   <div class="container">
-    <div class="login-box">
-      <div class="title-box">
-        <p class="title">登录</p>
-      </div>
-      <div class="edit-box">
-        <img class="icon" src="../assets/images/ic_login_account.png">
-        <input class="input" placeholder="账号" />
-      </div>
-      <div class="edit-box">
-        <img class="icon" src="../assets/images/ic_login_password.png">
-        <input class="input" type="password" placeholder="密码" />
-      </div>
-      <div class="verify-box">
-        <div class="edit-box" style="width: 40%;margin: 0;float: left">
-          <img class="icon" src="../assets/images/ic_login_check_code.png">
-          <input class="input" style="width: 0" placeholder="验证码" maxlength="4" />
+    <div class="top">
+      <img
+        src="../assets/images/pic_logo1.png"
+        width="187px">
+    </div>
+    <div class="main">
+      <div class="login-box">
+        <div class="title-box-login">
+          <span class="title">管理员登陆</span>
         </div>
-        <img class="img-verify" arc="code" id="code" @click="event().onVerifyImgClicked()">
+        <div class="edit-main">
+          <div class="edit-box">
+            <img
+              class="icon"
+              src="../assets/images/ic_login_account.png">
+            <div class="boder-one"/>
+            <input
+              class="input"
+              placeholder="请输入账号" >
+          </div>
+          <div class="edit-box">
+            <img
+              class="icon"
+              src="../assets/images/ic_login_password.png">
+            <div class="boder-one"/>
+            <input
+              class="input"
+              type="password"
+              placeholder="请输入密码" >
+          </div>
+          <div class="verify-box">
+            <div
+              class="edit-box">
+              <img
+                class="icon"
+                src="../assets/images/ic_login_check_code.png">
+              <div class="boder-one"/>
+              <input
+                class="input"
+                style="width: 0"
+                placeholder="请输入验证码"
+                maxlength="4" >
+            </div>
+            <img
+              class="img-verify"
+              arc="code"
+              id="code"
+              @click="event().onVerifyImgClicked()">
+          </div>
+          <el-button
+            class="login-btn"
+            @click="event().onLogin()">登录
+          </el-button>
+        </div>
       </div>
-      <el-button type="primary" class="login-btn" @click="event().onLogin()">登录</el-button>
+    </div>
+    <div class="foot">
+      <p>千色集团</p>
+      <p>服务电话：400-888-888</p>
     </div>
   </div>
 </template>
 
 <script>
-require('@/jslib/verify-code');
 
-import { mapGetters, mapActions } from 'vuex';
-
-import router from '@/router/build.js';
+import { encrypt } from '../filters/filter'
 
 export default {
   data() {
     return {
       code: '',
+      permissionList: [
+        {
+          name: '权限管理',
+          children: [],
+        },
+        {
+          name: '样例管理',
+        },
+      ],
     };
   },
 
@@ -45,22 +90,19 @@ export default {
   },
 
   methods: {
-    ...mapActions(['initialAuthority']),
 
     event() {
-      let self = this;
+      const self = this;
       return {
         onVerifyImgClicked() {
           self.handler().refreshCode();
         },
 
         onLogin() {
-          //写入权限表
-          self.initialAuthority(['dynamic', 'example']);
-          // 需要注意这里的默认路由推入vuex进行缓存, 注意需要在App.vue进行恢复
-          self.$store.commit('setRouter', '/authority-management');
-          // 设置index 对应的默认路由
-          router(self.$router, '/authority-management');
+          const jsonStrPer = JSON.stringify(self.permissionList)
+          // 对权限列表进行加密
+          const encryptPer = encrypt(jsonStrPer).toString()
+          sessionStorage.setItem('permission', encryptPer)
           self.$router.push({
             path: 'index',
           });
@@ -69,18 +111,18 @@ export default {
     },
 
     network() {
-      let self = this;
       return {
         getListA() {},
       };
     },
 
     handler() {
-      let self = this;
+      const self = this;
       return {
         refreshCode() {
-          var res = verifyCode();
-          var img = document.getElementById('code');
+          // eslint-disable-next-line no-undef
+          const res = verifyCode();
+          const img = document.getElementById('code');
           img.src = res.dataURL;
           self.code = res.code;
         },
@@ -92,70 +134,131 @@ export default {
 };
 </script>
 
-<style scoped>
-.container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-}
-
-.title-box {
-  width: 80%;
-  margin: 0 auto;
-}
-
-.title {
-}
-
-.login-box {
-  width: 400px;
-  height: 300px;
-  margin: auto auto;
-  border: 1px solid darkgray;
-}
-
-.login-box .edit-box {
-  margin-bottom: 20px;
-}
-
-.edit-box {
-  display: flex;
-  align-items: center;
-  width: 80%;
-  height: 40px;
-  margin: 0 auto;
-  padding: 0 12px;
-  border: 1px solid darkgray;
-}
-
-.edit-box .icon {
-  width: 22px;
-  margin-right: 20px;
-}
-
-.edit-box .input {
-  flex: 1;
-  outline: none;
-  border: none;
-}
-
-.verify-box {
-  position: relative;
-  width: 80%;
-  height: 40px;
-  margin: 0 auto;
-}
-
-.login-btn {
-  display: block;
-  width: 80%;
-  margin: 20px auto;
-}
-
-.img-verify {
-  float: left;
-  width: 100px;
-  height: 40px;
-  margin-left: 20px;
-}
+<style scoped lang="scss">
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    .top {
+      height: 95px;
+      width: 100%;
+      align-items: center;
+      display: flex;
+      img{
+        margin-left: 26%;
+        display: inline-block;
+      }
+    }
+    .main {
+      flex: 1;
+      padding: 147px 0 138px 0;
+      background: url(../assets/images/backgrou-img.jpg) center center fixed;
+      background-size: cover;
+      .login-box {
+        width: 371px;
+        height: 341px;
+        margin: auto auto;
+        background-color: #ffffff;
+        .title-box-login {
+          background: url(../assets/images/Oval_Copy_3@3x.png)  no-repeat;
+          width: 100%;
+          height: 58px;
+          span.title {
+            margin: 0 21px;
+            line-height: 58px;
+            font-size: 16px;
+            color: #ffffff
+          }
+        }
+        .edit-main{
+          padding: 18px 17px 28px;
+          .edit-box {
+            display: flex;
+            align-items: center;
+            width: 312px;
+            height: 45px;
+            margin-bottom: 16px;
+            padding: 0 12px;
+            border-radius: 3px;
+            border:1px solid rgba(32,53,128,0.16);
+            img.icon {
+              width: 17px;
+              margin-right: 14px;
+            }
+            div.boder-one{
+              width:0px;
+              height:24px;
+              border-left:1px solid rgba(216,221,233,1);
+            }
+            input.input {
+              padding:0 14px;
+              flex: 1;
+              outline: none;
+              border: none;
+              font-size: 12px;
+            }
+          }
+          .verify-box {
+            position: relative;
+            height: 40px;
+            width: 336px;
+            .edit-box {
+              width: 160px;
+              float: left;
+              display: flex;
+              align-items: center;
+              height: 40px;
+              margin: 0 auto;
+              padding: 0 12px;
+              border-radius: 3px;
+              border:1px solid rgba(32,53,128,0.16);
+              img.icon {
+                width: 17px;
+                margin-right: 14px;
+              }
+              div.boder-one{
+                width:0px;
+                height:24px;
+                border-left:1px solid rgba(216,221,233,1);
+              }
+              input.input {
+                flex: 1;
+                outline: none;
+                border: none;
+              }
+            }
+            img#code.img-verify {
+              float: left;
+              width: 100px;
+              height: 40px;
+              margin-left: 20px;
+            }
+          }
+          .login-btn {
+            margin: 27px auto 28px auto;
+            width:336px;
+            height:45px;
+            background:linear-gradient(90deg,rgba(192,0,0,1),rgba(153,0,0,1))!important;
+            border-radius:3px;
+            color: #ffffff;
+          }
+        }
+      }
+    }
+    .foot {
+      height: 54px;
+      display: flex;
+      padding: 27px 0 33px;
+      font-size: 14px;
+      flex-direction: column;
+      align-items: center;
+      p:first-child{
+        margin: 0;
+      }
+      p:last-child{
+        margin-top: 12px;
+      }
+    }
+  }
 </style>

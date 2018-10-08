@@ -1,10 +1,21 @@
 <template>
   <section class="container">
-    <table-pagination :config="config" :datasource="datasource" @change-page="handlerPageChange">
-      <el-table-column slot="action" fixed="right" label="操作" width="285" align="center">
+    <table-pagination
+      :config="config"
+      :datasource="datasource"
+      @change-page="handlerPageChange">
+      <el-table-column
+        slot="action"
+        fixed="right"
+        label="操作"
+        width="285"
+        align="center">
         <template slot-scope="scope">
           <div>
-            <el-button type="primary" plain @click="handlerNavigator(scope)">详情</el-button>
+            <el-button
+              type="primary"
+              plain
+              @click="handlerNavigator(scope)">详情</el-button>
           </div>
         </template>
       </el-table-column>
@@ -35,6 +46,10 @@ export default {
             name: '富文本编辑器',
             alias: 'editor',
           },
+          {
+            name: '表单校验',
+            alias: 'from',
+          },
         ],
       },
     };
@@ -44,9 +59,10 @@ export default {
     TablePagination,
   },
 
-  mounted() {},
+  mounted() { },
 
   methods: {
+    // eslint-disable-next-line no-unused-vars
     handlerPageChange(data) {
       this.datasource = {
         total: 1,
