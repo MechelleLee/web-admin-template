@@ -1,11 +1,16 @@
 <template>
   <el-row>
     <el-col>
-      <el-menu :default-active="$route.path" :router="routerMode" class="el-menu-vertical-demo full-height" background-color="#545c64" text-color="#fff">
-        <slot name="trademark">
-        </slot>
-        <slot name="router">
-        </slot>
+      <el-menu
+        :default-active="$route.path"
+        :router="routerMode"
+        class="el-menu-vertical-demo full-height"
+        background-color="#141414"
+        text-color="#666666"
+        active-text-color="#ffffff"
+      >
+        <slot name="trademark"/>
+        <slot name="router"/>
       </el-menu>
     </el-col>
   </el-row>

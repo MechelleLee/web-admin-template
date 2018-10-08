@@ -1,23 +1,15 @@
 <template>
   <el-container class="full-height bg-gray">
-    <el-header class="no-padding">
-      <top-bar>
-        <!--通过slot拓展的筛选项-->
-        <div slot="filter">
-          <el-button>1</el-button>
-          <el-button>2</el-button>
-          <el-button>3</el-button>
-        </div>
-      </top-bar>
-    </el-header>
     <el-main class="page-content">
       <!-- 建议使用 router-view -->
-      <router-view></router-view>
+      <router-view/>
     </el-main>
   </el-container>
 </template>
 
 <script>
+/* eslint-disable no-unused-vars */
+
 import TablePagination from '@/components/table-pagination';
 import QuillEditor from '../../components/quill-editor';
 
@@ -48,7 +40,6 @@ export default {
           },
         ],
       },
-
       html: '<p>测试</p>',
     };
   },
@@ -85,7 +76,6 @@ export default {
     },
 
     event() {
-      const self = this;
       return {
         detail(scope) {
           console.log('====================================');
@@ -96,15 +86,11 @@ export default {
     },
 
     handleClick(row) {
-      console.log(row);
     },
   },
 
   watch: {
     html(nv, ov) {
-      console.log('====================================');
-      console.log(nv);
-      console.log('====================================');
     },
   },
 };
