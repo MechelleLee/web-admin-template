@@ -37,3 +37,13 @@ export const decrypt = (encryptedData, secret = 'Danakl123') => {
   const plaintext = bytes.toString(CryptoJS.enc.Utf8);
   return plaintext
 }
+
+export const getOperationByName = (moduleName, operationList) => {
+// eslint-disable-next-line consistent-return
+  operationList.forEach((value, index) => {
+    console.log(index)
+    if (value.name === moduleName) {
+      return value.operations
+    }
+  })
+}

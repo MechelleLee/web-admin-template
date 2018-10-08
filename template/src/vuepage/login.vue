@@ -66,6 +66,7 @@
 <script>
 
 import { encrypt } from '../filters/filter'
+import { SET_OPERATIONS_MAP } from '@/vuex/modules/base/mutation-types'
 
 export default {
   data() {
@@ -73,13 +74,21 @@ export default {
       code: '',
       permissionList: [
         {
-          name: '权限管理',
-          children: [],
-        },
-        {
           name: '样例管理',
+          children: [
+            {
+              name: '批量下载',
+            },
+            {
+              name: '操作权限控制',
+            },
+          ],
         },
       ],
+      operationList: [{
+        name: '样例管理',
+        operations: ['编辑', '删除', '导出'],
+      }],
     };
   },
 
@@ -103,6 +112,8 @@ export default {
           // 对权限列表进行加密
           const encryptPer = encrypt(jsonStrPer).toString()
           sessionStorage.setItem('permission', encryptPer)
+          // 存储操作列表到store
+          self.$store.commit(SET_OPERATIONS_MAP, self.operationList)
           self.$router.push({
             path: 'index',
           });
@@ -125,6 +136,13 @@ export default {
           const img = document.getElementById('code');
           img.src = res.dataURL;
           self.code = res.code;
+        },
+        list2Map(list) {
+          const map = new Map()
+          list.forEach((value) => {
+            map.set(value.name, value.operations)
+          })
+          return map
         },
       };
     },

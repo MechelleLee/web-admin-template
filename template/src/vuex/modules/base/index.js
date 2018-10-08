@@ -3,7 +3,8 @@ import * as getters from './getters'
 import mutations from './mutations'
 
 const state = {
-  name: '',
+  name: 'isv',
+  operationMap: new Map(),
 }
 export default {
   actions,

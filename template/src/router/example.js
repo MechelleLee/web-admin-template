@@ -2,7 +2,8 @@ import Container from '@/vuepage/example/index';
 
 import ExampleList from '../vuepage/example/list';
 import ExampleEditor from '../vuepage/example/editor';
-import ExampleFrom from '../vuepage/example/from';
+import MultiPleDownload from '../vuepage/example/multiple-download';
+import Operation from '@/vuepage/example/operation-filter';
 
 export default [
   {
@@ -28,22 +29,36 @@ export default [
             url: '/example-management',
           },
           {
-            name: '文本编辑',
+            name: '富文本编辑',
             url: '',
           },
         ],
       },
       {
-        path: 'example-from',
-        component: ExampleFrom,
+        path: 'multiple-download',
+        component: MultiPleDownload,
         meta: [
           {
             name: '样例管理',
             url: '/example-management',
           },
           {
-            name: '文本编辑',
-            url: '',
+            name: '批量下载',
+            url: 'multiple-download',
+          },
+        ],
+      },
+      {
+        path: 'operation',
+        component: Operation,
+        meta: [
+          {
+            name: '样例管理',
+            url: '/example-management',
+          },
+          {
+            name: '操作权限控制',
+            url: '/operation',
           },
         ],
       },
