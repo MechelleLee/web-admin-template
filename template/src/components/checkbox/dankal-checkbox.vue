@@ -1,18 +1,16 @@
 <template>
-  <section>
-    <label
-      for=""
-      role="checkbox"
-      v-for="(item, index) in [1, 2, 3, 4]"
-      :key="index"
-      :item="item">
+  <section class="dankal-checkbox">
+    <label role="checkbox">
       <input
         type="checkbox"
-        :name="name"
-        :value="item"
+        :value="value || label"
         v-model="model"
-        @change="handleChange">
-      <span>{{ item }}</span>
+        @change="handleChange"
+      >
+      <slot
+        :data="value || label"
+        :checked="checked"
+      />
     </label>
   </section>
 </template>
@@ -26,11 +24,19 @@ export default {
   data() {
     return {
       name: 'dankal-checkbox',
-      value: [],
+      checked: false,
     }
   },
 
   props: {
+    value: {
+      type: [String, Number],
+      default: '',
+    },
+    label: {
+      type: [String, Number],
+      default: '',
+    },
   },
 
   computed: {
@@ -40,9 +46,6 @@ export default {
       },
 
       set(val) {
-        console.log('====================================');
-        console.log(val);
-        console.log('====================================');
         this.dispatch('DankalCheckboxGroup', 'input', [val]);
       },
     },
@@ -56,14 +59,19 @@ export default {
   },
 
   methods: {
-    handleChange(data) {
-      console.log('====================================');
-      console.log(data);
-      console.log('====================================');
+    handleChange(event) {
+      this.checked = event.target.checked;
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
+.dankal-checkbox {
+  display: inline-block;
+
+  input {
+    display: none;
+  }
+}
 </style>

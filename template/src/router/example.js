@@ -4,6 +4,7 @@ import ExampleList from '../vuepage/example/list';
 import ExampleEditor from '../vuepage/example/editor';
 import MultiPleDownload from '../vuepage/example/multiple-download';
 import Operation from '@/vuepage/example/operation-filter';
+import From from '../vuepage/example/from';
 
 export default [
   {
@@ -45,6 +46,20 @@ export default [
           {
             name: '批量下载',
             url: 'multiple-download',
+          },
+        ],
+      },
+      {
+        path: 'example-from',
+        component: From,
+        meta: [
+          {
+            name: '样例管理',
+            url: '/example-management',
+          },
+          {
+            name: '表单设计',
+            url: '/example-from',
           },
         ],
       },
