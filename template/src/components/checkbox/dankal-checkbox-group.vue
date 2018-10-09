@@ -12,11 +12,14 @@ export default {
 
   props: {
     // eslint-disable-next-line
-    value: {},
+    value: {
+      type: [Array],
+      default: () => [],
+    },
+    limit: {
+      type: Number,
+      default: 0,
+    },
   },
 }
 </script>
-
-
-<style lang="scss" scoped>
-</style>

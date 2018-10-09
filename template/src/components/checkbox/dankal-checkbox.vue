@@ -4,6 +4,7 @@
       <input
         type="checkbox"
         :value="value || label"
+        :disabled="disable"
         v-model="model"
         @change="handleChange"
       >
@@ -46,12 +47,23 @@ export default {
       },
 
       set(val) {
-        this.dispatch('DankalCheckboxGroup', 'input', [val]);
+        if (!this.limit || !this.disable) {
+          this.dispatch('DankalCheckboxGroup', 'input', [val]);
+        }
       },
     },
 
     store() {
       return this.$parent.value;
+    },
+
+    limit() {
+      return this.$parent.limit;
+    },
+
+    disable() {
+      if (this.checked) return false;
+      return !(this.store.length < this.limit);
     },
   },
 

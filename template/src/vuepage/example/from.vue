@@ -1,24 +1,34 @@
 <template>
   <section class="container">
-    <!-- <dankal-input /> -->
-    <dankal-checkbox-group v-model="group">
-      <dankal-checkbox
-        v-for="(item, index) in [1, 2, 3, 4]"
-        :key="index"
-        :label="item"
+    <dankal-card :style="{width: '300px'}">
+      <div>
+        <h4>基于 label 实现复选框</h4>
+      </div>
+      <dankal-checkbox-group
+        v-model="group"
+        :limit="limit"
       >
-        <template slot-scope="scope">
-          <span
-            class="dankal-checkbox-container"
-            :class="{checked: scope.checked}"
-          >{{ scope.data }}</span>
-        </template>
-      </dankal-checkbox>
-    </dankal-checkbox-group>
+        <dankal-checkbox
+          v-for="(item, index) in [1, 2, 3, 4, 5, 6]"
+          :key="index"
+          :label="item"
+        >
+          <template slot-scope="scope">
+            <span
+              class="dankal-checkbox-container"
+              :class="{checked: scope.checked}"
+            >
+              {{ scope.data }}
+            </span>
+          </template>
+        </dankal-checkbox>
+      </dankal-checkbox-group>
+    </dankal-card>
   </section>
 </template>
 
 <script>
+import DankalCard from '../../components/card/dankal-card';
 import DankalInput from '../../components/dankal-input';
 import DankalCheckbox from '../../components/checkbox/dankal-checkbox';
 import DankalCheckboxGroup from '../../components/checkbox/dankal-checkbox-group';
@@ -26,20 +36,19 @@ import DankalCheckboxGroup from '../../components/checkbox/dankal-checkbox-group
 export default {
   data() {
     return {
-      source: [1, 2, 3],
       group: [],
+      limit: 2,
     }
   },
 
   components: {
+    DankalCard,
     DankalInput,
     DankalCheckbox,
     DankalCheckboxGroup,
   },
 
-  methods: {
-
-  },
+  methods: {},
 }
 </script>
 
@@ -49,7 +58,7 @@ export default {
 .dankal-checkbox-container {
   display: inline-block;
 
-  width: 46px;
+  width: 48px;
   height: 32px;
   background: rgba(249, 249, 249, 1);
   border: 1px solid rgba(210, 210, 210, 1);
