@@ -4,7 +4,8 @@ import ExampleList from '../vuepage/example/list';
 import ExampleEditor from '../vuepage/example/editor';
 import MultiPleDownload from '../vuepage/example/multiple-download';
 import Operation from '@/vuepage/example/operation-filter';
-import From from '../vuepage/example/from';
+import ExampleForm from '../vuepage/example/form';
+import ExampleTree from '../vuepage/example/tree';
 
 export default [
   {
@@ -50,8 +51,8 @@ export default [
         ],
       },
       {
-        path: 'example-from',
-        component: From,
+        path: 'example-form',
+        component: ExampleForm,
         meta: [
           {
             name: '样例管理',
@@ -59,7 +60,21 @@ export default [
           },
           {
             name: '表单设计',
-            url: '/example-from',
+            url: '/example-form',
+          },
+        ],
+      },
+      {
+        path: 'example-tree',
+        component: ExampleTree,
+        meta: [
+          {
+            name: '样例管理',
+            url: '/example-management',
+          },
+          {
+            name: '表单设计',
+            url: '/example-tree',
           },
         ],
       },

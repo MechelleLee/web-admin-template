@@ -1,19 +1,31 @@
 <template>
   <section class="container">
-    <div />
+    <dankal-tree :datasource="datasource">
+      <template slot-scope="scope">
+        <span>{{ scope.data.text }}</span>
+      </template>
+    </dankal-tree>
   </section>
 </template>
 
 <script>
-import DankalTree from '../../components/tree/dankal-tree';
-import DankalTreeNode from '../../components/tree/dankal-tree-node';
+import DankalTree from '@/components/tree/dankal-tree';
+import DankalTreeNode from '@/components/tree/dankal-tree-node';
 
 export default {
   data() {
-    return {}
+    return {
+      datasource: [{
+        text: 'INTEL YES',
+        isRoot: true,
+        datasource: [{
+          text: 'AMD YES',
+        }],
+      }],
+    }
   },
 
-  component: {
+  components: {
     DankalTree,
     DankalTreeNode,
   },

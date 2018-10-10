@@ -53,7 +53,7 @@ export default {
           },
           {
             name: '表单设计',
-            alias: 'from',
+            alias: 'form',
           },
           {
             name: '树形设计',
