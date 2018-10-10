@@ -17,10 +17,10 @@ export default {
 
   props: {
     // 用于自定义 Card 的样式
-    style: {
-      type: Object,
-      default: () => {},
-    },
+    // style: {
+    //   type: Object,
+    //   default: () => {},
+    // },
     // 用于控制 Shadow 的显示
     hover: {
       type: [Boolean],

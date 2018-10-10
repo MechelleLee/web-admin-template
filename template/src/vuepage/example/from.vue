@@ -28,10 +28,10 @@
 </template>
 
 <script>
-import DankalCard from '../../components/card/dankal-card';
-import DankalInput from '../../components/dankal-input';
-import DankalCheckbox from '../../components/checkbox/dankal-checkbox';
-import DankalCheckboxGroup from '../../components/checkbox/dankal-checkbox-group';
+import DankalCard from '@/components/card/dankal-card';
+import DankalInput from '@/components/input/dankal-input';
+import DankalCheckbox from '@/components/checkbox/dankal-checkbox';
+import DankalCheckboxGroup from '@/components/checkbox/dankal-checkbox-group';
 
 export default {
   data() {

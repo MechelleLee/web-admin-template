@@ -52,8 +52,12 @@ export default {
             alias: 'editor',
           },
           {
-            name: '表单校验',
+            name: '表单设计',
             alias: 'from',
+          },
+          {
+            name: '树形设计',
+            alias: 'tree',
           },
         ],
       },
