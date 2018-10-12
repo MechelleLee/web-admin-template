@@ -1,16 +1,22 @@
 <template>
   <section class="dankal-tree-node">
-    <div
-      class="dankal-tree-node-item"
-      v-for="(item, index) in datasource"
-      :key="index"
+    <node-content
+      :root="data.root"
+      :data="data"
+      :template="template"
+    />
+    <transition-group
+      tag="div"
+      name="dankal-tree-node-animation"
     >
-      <slot :data="item" />
       <dankal-tree-node
-        v-if="item.isRoot"
-        :datasource="item.datasource"
+        v-if="data.root && launch"
+        v-for="(item, index) in data.child"
+        :key="index"
+        :data="item"
+        :template="template"
       />
-    </div>
+    </transition-group>
   </section>
 </template>
 
@@ -21,27 +27,97 @@ export default {
   componentName: 'DankalTreeNode',
 
   data() {
-    return {}
+    return {
+      launch: true,
+      height: 0,
+    }
+  },
+
+  mounted() {
+    // this.height = this.$refs.node.clientHeight;
   },
 
   props: {
-    datasource: {
-      type: [Array, Object],
-      default: () => [],
+    data: {
+      type: Object,
+      // eslint-disable-next-line
+      default: () => {
+        return {
+          text: 'node',
+          root: false,
+          datasource: [],
+        };
+      },
+    },
+
+    template: {
+      type: Function,
+      default: () => () => (<span>This is default template of tree's node</span>),
+    },
+  },
+
+  components: {
+    NodeContent: {
+      props: {
+        data: {
+          type: Object,
+          default: () => {},
+          require: true,
+        },
+        root: {
+          type: Boolean,
+          default: false,
+        },
+      },
+
+      render(h) {
+        // eslint-disable-next-line
+        const parent = this.$parent;
+        const { data, root } = this;
+        // 该 call 方法无法使 render 函数的 this 重新指向
+        return this.$parent.template.call(this, h, { data, root, parent });
+      },
+    },
+  },
+
+  methods: {
+    handlerLaunch() {
+      this.launch = !this.launch;
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.dankal-tree-node-item::before {
-  content: '';
+.dankal-tree-node {
+  position: relative;
+}
 
-  display: inline-block;
+.dankal-tree-node-animation {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  transition: height 0.2s;
 
-  width: 16px;
-  height: 16px;
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+  }
 
-  background-color: red;
+  &-leave,
+  &-enter-to {
+    opacity: 1;
+  }
+
+  &-enter-active,
+  &-leave-active {
+    position: absolute;
+    width: 100%;
+    transition: opacity 200ms ease-in-out;
+  }
+
+  &-enter-active {
+    // transition-delay: 100ms;
+  }
 }
 </style>
