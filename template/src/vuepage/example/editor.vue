@@ -1,32 +1,40 @@
 <template>
   <section class="container">
-    <quill-editor
+    <dankal-editor
       v-model="html"
-      @change="handlerTextPage"/>
+      :config="config"
+    />
   </section>
 </template>
 
 <script>
-import QuillEditor from '@/components/quill-editor';
-import Mixins from '@/mixins/operations'
+import DankalEditor from '@/components/editor/dankal-editor';
+import Mixins from '@/mixins/operations';
+
+import editor from '../../configs/editor';
 
 export default {
   data() {
     return {
       html: '<p>测试</p>',
+      config: {},
     };
   },
+
   mixins: [Mixins],
+
   components: {
-    QuillEditor,
+    DankalEditor,
+  },
+
+  created() {
+    // 自定义配置
+    this.config = Object.assign({}, editor, {
+      height: 750,
+    });
   },
 
   methods: {
-    handlerTextPage(data) {
-      console.log('====================================');
-      console.log(data);
-      console.log('====================================');
-    },
   },
 
   watch: {

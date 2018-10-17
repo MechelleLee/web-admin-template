@@ -92,6 +92,10 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@ckeditor/ckeditor5-build-decoupled-document@^11.1.1":
+  version "11.1.1"
+  resolved "http://registry.npm.taobao.org/@ckeditor/ckeditor5-build-decoupled-document/download/@ckeditor/ckeditor5-build-decoupled-document-11.1.1.tgz#0837e0806392304b5b774147b659fcaf4a52af81"
+
 "@types/strip-bom@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/strip-bom/-/strip-bom-3.0.0.tgz#14a8ec3956c2e81edb7520790aecf21c290aebd2"
