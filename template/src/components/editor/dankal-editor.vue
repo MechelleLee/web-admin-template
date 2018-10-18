@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import '@ckeditor/ckeditor5-ui/theme/globals/_reset.css';
 import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 
 export default {
@@ -38,13 +39,21 @@ export default {
   mounted() {
     const self = this;
 
+    const plugins = this.config.plugins || [];
+    const config = Object.assign({}, this.config, {
+      plugins: DecoupledEditor.builtinPlugins.concat(plugins),
+    });
+
+    console.log('====================================');
+    console.log(config);
+    console.log('====================================');
+
     DecoupledEditor
-      .create(this.$refs.container, this.config)
+      .create(this.$refs.container, config)
       .then((editor) => {
         const toolbarContainer = self.$refs.toolbar;
         toolbarContainer.appendChild(editor.ui.view.toolbar.element);
 
-        window.editor = editor;
         self.editor = editor;
 
         editor.model.document.on('change:data', () => {
@@ -53,6 +62,9 @@ export default {
       })
       .catch((error) => {
         self.$emit('error', error);
+        console.log('====================================');
+        console.log(error);
+        console.log('====================================');
       });
   },
 

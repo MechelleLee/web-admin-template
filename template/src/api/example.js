@@ -1,3 +1,5 @@
+import axios from '../jslib/dk-axios';
+
 // eslint-disable-next-line
 export const getImageUpload = () => new Promise((resolve, reject) => {
   setTimeout(() => {
@@ -7,4 +9,7 @@ export const getImageUpload = () => new Promise((resolve, reject) => {
   }, 2000);
 });
 
-export const getMockDate = () => {};
+export const getCloudsToken = () => axios({
+  url: '/app/communal/qiniu',
+  method: 'GET',
+});

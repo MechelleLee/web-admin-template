@@ -11,13 +11,21 @@
 import DankalEditor from '@/components/editor/dankal-editor';
 import Mixins from '@/mixins/operations';
 
-import editor from '../../configs/editor';
+import property from '@/configs/editor';
+
+import { getCloudsToken } from '../../api/example';
+import CloudUpload from '../../components/editor/plugins/cloud-upload';
 
 export default {
   data() {
     return {
       html: '<p>测试</p>',
       config: {},
+      upload: {
+        domain: 'https://upload-z2.qiniup.com',
+        url: '',
+        filename: 'file',
+      },
     };
   },
 
@@ -27,14 +35,50 @@ export default {
     DankalEditor,
   },
 
-  created() {
+  async created() {
+    this.network().getCloudsToken();
     // 自定义配置
-    this.config = Object.assign({}, editor, {
-      height: 750,
+    this.config = Object.assign({}, property, {
+      plugins: [CloudUpload],
+      toolbar: property.toolbar.concat(['CloudUpload'], ['|', 'undo', 'redo']),
+      upload: {
+        config: this.handleUploadConfig,
+        handle: this.handlerImageUpload,
+      },
     });
   },
 
+  mounted() {
+    console.log('====================================');
+    console.log('dala');
+    console.log('====================================');
+  },
+
   methods: {
+    handleUploadConfig() {
+      return this.upload;
+    },
+
+    handlerImageUpload(data) {
+      return `${this.upload.url}${data.hash}`;
+    },
+
+    network() {
+      const self = this;
+
+      return {
+        async getCloudsToken() {
+          const { data } = await getCloudsToken();
+
+          self.upload = Object.assign(self.upload, {
+            url: data.url,
+            data: {
+              token: data.token,
+            },
+          });
+        },
+      }
+    },
   },
 
   watch: {

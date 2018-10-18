@@ -19,8 +19,6 @@ module.exports = {
     '|',
     'link',
     '|',
-    'undo',
-    'redo',
   ],
   // 标题的配置
   heading: {

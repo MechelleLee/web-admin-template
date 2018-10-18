@@ -5,24 +5,28 @@
 import axios from 'axios';
 import utils from './dk-utils';
 
-import { domain } from './environment';
+import env from '../configs/env';
 
 const dkAxios = axios.create({
-  baseURL: domain,
-  timeout: 10000, //设置超时时间
+  baseURL: env.apiDomain,
+  timeout: 10000, // 设置超时时间
 });
 
 let loading;
-dkAxios.interceptors.request.use(
-  function(config) {
-    // 访问网络时加载loading,防止用户多次操作
-    const token = utils.getCookie('projectName_token');
 
+dkAxios.interceptors.request.use(
+  (config) => {
+    const token = utils.getCookie('projectName_token');
     if (token) {
-      config.headers = { token: token };
+      const { headers } = config;
+
+      // eslint-disable-next-line
+      config.headers = Object.assign({}, headers, {
+        token,
+      });
     }
 
-    loading = vm.$loading({
+    loading = window.vm.$loading({
       lock: true,
       text: 'Loading',
       spinner: 'el-icon-loading',
@@ -31,27 +35,28 @@ dkAxios.interceptors.request.use(
 
     return config;
   },
-  function(error) {
-    // Do something with request error
-    return Promise.reject(error);
-  },
+
+  error => Promise.reject(error),
 );
 
 dkAxios.interceptors.response.use(
-  function(response) {
+  (response) => {
     loading.close();
     return response;
   },
-  function(error) {
+
+  // eslint-disable-next-line
+  error => {
     loading.close();
-    let { status, data } = error.response;
+
+    const { status, data } = error.response;
 
     switch (status) {
       case 401:
-        vm.$router.replace('/login');
+        window.vm.$router.replace('/login');
         break;
       default:
-        vm.$message(data.error.message);
+        window.vm.$message(data.error.message);
         return Promise.reject(error);
     }
   },

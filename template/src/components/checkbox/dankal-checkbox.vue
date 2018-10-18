@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import Emitter from '../../minxins/emitter';
+import Emitter from '../../mixins/emitter';
 
 export default {
   mixins: [Emitter],
