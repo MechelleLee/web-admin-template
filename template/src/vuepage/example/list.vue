@@ -59,6 +59,10 @@ export default {
             name: '树形设计',
             alias: 'tree',
           },
+          {
+            name: '地图选址',
+            alias: 'map',
+          },
         ],
       },
     };
