@@ -44,10 +44,6 @@ export default {
       plugins: DecoupledEditor.builtinPlugins.concat(plugins),
     });
 
-    console.log('====================================');
-    console.log(config);
-    console.log('====================================');
-
     DecoupledEditor
       .create(this.$refs.container, config)
       .then((editor) => {
@@ -62,9 +58,6 @@ export default {
       })
       .catch((error) => {
         self.$emit('error', error);
-        console.log('====================================');
-        console.log(error);
-        console.log('====================================');
       });
   },
 
