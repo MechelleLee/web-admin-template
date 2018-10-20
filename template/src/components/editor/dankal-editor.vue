@@ -36,6 +36,12 @@ export default {
     },
   },
 
+  watch: {
+    value(n, v) {
+      if (this.editor && !v) this.editor.setData(n);
+    },
+  },
+
   mounted() {
     const self = this;
 
@@ -51,6 +57,10 @@ export default {
         toolbarContainer.appendChild(editor.ui.view.toolbar.element);
 
         self.editor = editor;
+
+        if (self.value) {
+          self.editor.setData(self.value);
+        }
 
         editor.model.document.on('change:data', () => {
           self.handlerEditorValue();

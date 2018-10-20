@@ -154,6 +154,8 @@ export default {
           queue.push(compressor.compress(files[i], {
             quality,
           }));
+        } else {
+          queue.push(files[i]);
         }
       }
 

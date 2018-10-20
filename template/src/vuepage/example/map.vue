@@ -8,8 +8,9 @@
     </dankal-card>
     <dankal-card>
       <dankal-map
-        :initial="initial"
         city="广州市"
+        ref="picker"
+        :initial="initial"
       />
     </dankal-card>
   </section>
@@ -18,6 +19,8 @@
 <script>
 import DankalMap from '@/components/map/dankal-map';
 import DankalCard from '@/components/card/dankal-card';
+
+import PositionPicker from '../../components/map/plugins/position-picker';
 
 export default {
   data() {
@@ -31,6 +34,13 @@ export default {
   components: {
     DankalMap,
     DankalCard,
+  },
+
+  mounted() {
+    setTimeout(() => {
+      const picker = new PositionPicker(this.$refs.picker.map);
+      picker.init();
+    }, 5000);
   },
 }
 </script>

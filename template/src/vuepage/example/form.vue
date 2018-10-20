@@ -28,11 +28,21 @@
       <dankal-upload
         v-model="images"
         :accept="accept"
-        :compress="true"
         :upload="handleImageUpload"
         :handle="handleImageBuilds"
         @error="onFileUploadError"
       >
+        <template
+          slot="images"
+          slot-scope="scope"
+        >
+          <img
+            v-for="(item, index) in scope.files"
+            :key="index"
+            :src="item"
+            class="upload-image"
+          >
+        </template>
         <template slot-scope="scope">
           <div class="upload-block">
             <i class="el-icon-upload" />
@@ -52,6 +62,17 @@
         :handle="handleImageBuilds"
         @error="onFileUploadError"
       >
+        <template
+          slot="images"
+          slot-scope="scope"
+        >
+          <img
+            v-for="(item, index) in scope.files"
+            :key="index"
+            :src="item"
+            class="upload-image"
+          >
+        </template>
         <template slot-scope="scope">
           <div class="upload-block multiple">
             <i class="el-icon-upload" />
@@ -71,7 +92,7 @@ import DankalCheckboxGroup from '@/components/checkbox/dankal-checkbox-group';
 import DankalUpload from '@/components/upload/dankal-upload';
 
 // API引入
-import { getImageUpload } from '@/api/example';
+import { getCloudsToken, getImageUpload } from '@/api/example';
 
 export default {
   data() {
@@ -93,6 +114,10 @@ export default {
     DankalUpload,
   },
 
+  created() {
+    this.network().getCloudsToken();
+  },
+
   methods: {
     onFileUploadError(error) {
       console.log('====================================');
@@ -101,19 +126,29 @@ export default {
     },
 
     handleImageUpload(file) {
-      let form = new FormData();
+      const form = new FormData();
 
-      form = Object.assign({
-        tokem: '',
-        file,
-      })
+      form.append('token', this.token);
+      form.append('file', file);
 
       return getImageUpload(form);
     },
 
-    handleImageBuilds(data) {
-      const { hash } = data;
+    handleImageBuilds(res) {
+      const { hash } = res.data;
       return `${this.domain}/${hash}`;
+    },
+
+    network() {
+      const self = this;
+
+      return {
+        async getCloudsToken() {
+          const { data } = await getCloudsToken();
+          self.domain = data.url;
+          self.token = data.token;
+        },
+      }
     },
   },
 }
@@ -173,5 +208,7 @@ export default {
   }
 }
 
-// .upload-block.
+.upload-image {
+  height: 178px;
+}
 </style>

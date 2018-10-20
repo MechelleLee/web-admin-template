@@ -54,30 +54,10 @@ export default {
     const { identifier, city } = this;
 
     this.map = new window.AMap.Map(identifier, this.config);
-    window.AMap.plugin(['AMap.ToolBar', 'AMap.Driving', 'AMap.OverView'], () => {
-      const toolbar = new window.AMap.ToolBar();
-      this.map.addControl(toolbar);
-    });
     this.map.setCity(city);
   },
 
   methods: {
-    marker(longitude, latitude) {
-      const marker = new window.AMap.Marker({
-        map: this.map,
-        position: [longitude, latitude],
-      });
-      this.markers.push(marker);
-      this.map.setFitView();
-    },
-
-    clear() {
-      this.markers.forEach((item) => {
-        this.map.remove(item);
-      });
-      this.markers = [];
-    },
-
     handlerLocation(address) {
       return new Promise((resolve, reject) => {
         if (window.AMap) reject();
