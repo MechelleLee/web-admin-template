@@ -1,12 +1,13 @@
 import axios from '../jslib/dk-axios';
+import env from '../configs/env';
 
-// eslint-disable-next-line
-export const getImageUpload = () => new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve({
-      hash: '201810151726',
-    });
-  }, 2000);
+export const getImageUpload = data => axios({
+  url: env.uploadDomain,
+  headers: {
+    'content-type': 'multipart/form-data',
+  },
+  method: 'POST',
+  data,
 });
 
 export const getCloudsToken = () => axios({
