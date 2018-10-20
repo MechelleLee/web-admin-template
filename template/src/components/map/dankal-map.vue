@@ -1,63 +1,64 @@
 <template>
   <section class="amap">
-    <div id="container" />
+    <div :id="identifier" />
   </section>
 </template>
 
 <script>
+import ScriptLoader from '../../jslib/script-loader';
+import Uuid from '../../jslib/uuid';
+
 export default {
   data() {
     return {
+      identifier: Uuid('dankal'),
       map: null,
-      markers: [],
+      // markers: [],
     };
   },
 
   props: {
-    postion: {
+    initial: {
       type: Object,
-      default: () => {},
-      required: false,
+      default: () => ({
+        version: '1.4.6',
+        key: '',
+      }),
+    },
+    config: {
+      type: Object,
+      default: () => ({
+        resizeEnable: true,
+        zoom: 13,
+      }),
+    },
+    plugins: {
+      type: Array,
+      default: () => [],
     },
     city: {
       type: String,
       default: '',
     },
-    zoom: {
-      type: Number,
-      default: 13,
-    },
-    longitude: {
-      type: String,
-      default: '',
-    },
-    dimension: {
-      type: String,
-      default: '',
-    },
-    // 启用事件
-    getPostion: {
-      type: Boolean,
-      default: false,
-    },
   },
 
   created() {},
 
-  mounted() {
-    const element = document.createElement('script');
-    element.src = 'https://webapi.amap.com/maps?v=1.4.6&key=a4e1f4591bf569936909fefb25663508&plugin=AMap.Geocoder';
-    document.head.appendChild(element);
-    console.log('====================================');
-    console.log(window.AMap);
-    console.log('====================================');
+  async mounted() {
+    if (!window.AMap) {
+      const src = `https://webapi.amap.com/maps?v=${this.initial.version || '1.4.6'}&key=${this.initial.key}`;
+      const loader = new ScriptLoader(src);
+      await loader.load();
+    }
 
-    // this.map = new window.AMap.Map('container', {
-    //   resizeEnable: true,
-    //   zoom: 13,
-    // });
+    const { identifier, city } = this;
 
-    // this.map.setCity('深圳市');
+    this.map = new window.AMap.Map(identifier, this.config);
+    window.AMap.plugin(['AMap.ToolBar', 'AMap.Driving', 'AMap.OverView'], () => {
+      const toolbar = new window.AMap.ToolBar();
+      this.map.addControl(toolbar);
+    });
+    this.map.setCity(city);
   },
 
   methods: {
@@ -75,6 +76,38 @@ export default {
         this.map.remove(item);
       });
       this.markers = [];
+    },
+
+    handlerLocation(address) {
+      return new Promise((resolve, reject) => {
+        if (window.AMap) reject();
+        window.AMap.plugin('AMap.Geocoder', () => {
+          const geocoder = new window.AMap.Geocoder();
+
+          geocoder.getLocation(address, (status, result) => {
+            if (status === 'complete' && result.info === 'OK') {
+              resolve(result);
+            }
+            reject();
+          })
+        });
+      });
+    },
+
+    handlerAddress(lnglat) {
+      return new Promise((resolve, reject) => {
+        if (window.AMap) reject();
+        window.AMap.plugin('AMap.Geocoder', () => {
+          const geocoder = new window.AMap.Geocoder();
+
+          geocoder.getAddress(lnglat, (status, result) => {
+            if (status === 'complete' && result.info === 'OK') {
+              resolve(result);
+            }
+            reject();
+          })
+        });
+      });
     },
   },
 };
