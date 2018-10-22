@@ -27,8 +27,10 @@ export default class PositionPicker {
         map,
       });
 
+      this.picker = picker;
+
       picker.on('success', result => this.success(result));
-      picker.on('fail', result => this.success(result));
+      picker.on('fail', result => this.fail(result));
 
       picker.start();
       map.panBy(0, 1);
@@ -47,5 +49,13 @@ export default class PositionPicker {
     console.log('====================================');
     console.log(result);
     console.log('====================================');
+  }
+
+  start() {
+    this.picker.start();
+  }
+
+  stop() {
+    this.picker.stop();
   }
 }

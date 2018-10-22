@@ -11,6 +11,7 @@
         city="广州市"
         ref="picker"
         :initial="initial"
+        :hook="handlerMapHook"
       />
     </dankal-card>
   </section>
@@ -36,11 +37,13 @@ export default {
     DankalCard,
   },
 
-  mounted() {
-    setTimeout(() => {
-      const picker = new PositionPicker(this.$refs.picker.map);
+  mounted() {},
+
+  methods: {
+    handlerMapHook(map) {
+      const picker = new PositionPicker(map);
       picker.init();
-    }, 5000);
+    },
   },
 }
 </script>

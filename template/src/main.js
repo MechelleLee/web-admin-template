@@ -5,6 +5,7 @@ import ElementUI from 'element-ui';
 import App from './App';
 import router from './router/index';
 import 'element-ui/lib/theme-chalk/index.css';
+import Loading from './plugins/loading';
 
 // vuex 配置
 import store from './vuex/store';
@@ -12,19 +13,20 @@ import store from './vuex/store';
 import TopBar from './components/top-bar';
 import DankalCard from './components/card/dankal-card';
 
-// quill 富文本编辑器
-import 'quill/dist/quill.core.css';
-import 'quill/dist/quill.snow.css';
-import 'quill/dist/quill.bubble.css';
-
-require('./filters/vue-filiter');
+require('./filters/vue-filter');
 require('./jslib/verify-code.min');
 
 Vue.config.productionTip = false;
 
 Vue.use(ElementUI);
 
-// 每个页面都需要用的组件可以注册成全局组件，方便每个页面使用
+// plugins, 注册全局插件
+Vue.use(Loading, {
+  // eslint-disable-next-line
+  icon: require('./assets/images/loading.gif'),
+});
+
+// component, 注册全局组件
 Vue.component('top-bar', TopBar);
 Vue.component('dankal-card', DankalCard);
 

@@ -1,5 +1,7 @@
 <template>
-  <section class="container">
+  <section
+    class="container"
+  >
     <table-pagination
       :config="config"
       :datasource="datasource"
@@ -12,15 +14,15 @@
         width="285"
         align="center"
       >
-        <template slot-scope="scope">
+        <template
+          slot-scope="scope"
+        >
           <div>
             <el-button
               type="primary"
               plain
               @click="handlerNavigator(scope)"
-            >
-              详情
-            </el-button>
+            >详情</el-button>
           </div>
         </template>
       </el-table-column>
@@ -63,6 +65,10 @@ export default {
             name: '地图选址',
             alias: 'map',
           },
+          {
+            name: '插件设计',
+            alias: 'plugins',
+          },
         ],
       },
     };
@@ -71,6 +77,9 @@ export default {
   components: {
     TablePagination,
   },
+
+  mounted() {},
+
   methods: {
     // eslint-disable-next-line no-unused-vars
     handlerPageChange(data) {

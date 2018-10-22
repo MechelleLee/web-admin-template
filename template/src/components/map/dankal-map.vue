@@ -25,6 +25,7 @@ export default {
         key: '',
       }),
     },
+
     config: {
       type: Object,
       default: () => ({
@@ -32,21 +33,31 @@ export default {
         zoom: 13,
       }),
     },
-    plugins: {
-      type: Array,
-      default: () => [],
-    },
+
     city: {
       type: String,
       default: '',
+    },
+
+    hook: {
+      type: Function,
+      default: () => () => {},
     },
   },
 
   created() {},
 
   async mounted() {
+    // 高德地图 SDK 的核心库
     if (!window.AMap) {
       const src = `https://webapi.amap.com/maps?v=${this.initial.version || '1.4.6'}&key=${this.initial.key}`;
+      const loader = new ScriptLoader(src);
+      await loader.load();
+    }
+
+    // 高德地图 SDK 的 UI 库
+    if (!window.AMapUI) {
+      const src = 'https://webapi.amap.com/ui/1.0/main.js?v=1.0.11';
       const loader = new ScriptLoader(src);
       await loader.load();
     }
@@ -55,6 +66,9 @@ export default {
 
     this.map = new window.AMap.Map(identifier, this.config);
     this.map.setCity(city);
+
+    // 设置钩子函数，便于控制权的转移
+    this.hook(this.map);
   },
 
   methods: {
