@@ -1,16 +1,20 @@
 import axios from '../jslib/dk-axios';
-import env from '../configs/env';
+import { UploadDomain } from '../configs/env';
 
-export const getImageUpload = data => axios({
-  url: env.uploadDomain,
-  headers: {
-    'content-type': 'multipart/form-data',
-  },
-  method: 'POST',
-  data,
-});
+export const getImageUpload = data =>
+  // eslint-disable-next-line
+  axios({
+    url: UploadDomain,
+    headers: {
+      'content-type': 'multipart/form-data',
+    },
+    method: 'POST',
+    data,
+  });
 
-export const getCloudsToken = () => axios({
-  url: '/app/communal/qiniu',
-  method: 'GET',
-});
+export const getCloudsToken = () =>
+  // eslint-disable-next-line
+  axios({
+    url: '/app/communal/qiniu',
+    method: 'GET',
+  });

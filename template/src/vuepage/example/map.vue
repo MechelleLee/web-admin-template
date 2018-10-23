@@ -3,25 +3,23 @@
     <dankal-card>
       <dankal-map
         :initial="initial"
-        city="深圳市"
-      />
-    </dankal-card>
-    <dankal-card>
-      <dankal-map
-        city="广州市"
-        ref="picker"
-        :initial="initial"
-        :hook="handlerMapHook"
-      />
+      >
+        <dankal-map-position-picker
+          @success="onDragPickerAddress"
+        />
+      </dankal-map>
+      <span
+        class="message-line"
+      >{{ address }}</span>
     </dankal-card>
   </section>
 </template>
 
 <script>
-import DankalMap from '@/components/map/dankal-map';
 import DankalCard from '@/components/card/dankal-card';
 
-import PositionPicker from '../../components/map/plugins/position-picker';
+import DankalMap from '@/components/map/dankal-map';
+import DankalMapPositionPicker from '@/components/map/dankal-map-position-picker';
 
 export default {
   data() {
@@ -29,27 +27,33 @@ export default {
       initial: {
         key: 'a4e1f4591bf569936909fefb25663508',
       },
-    }
+      address: '',
+    };
   },
 
   components: {
-    DankalMap,
     DankalCard,
+    DankalMap,
+    DankalMapPositionPicker,
   },
 
   mounted() {},
 
   methods: {
-    handlerMapHook(map) {
-      const picker = new PositionPicker(map);
-      picker.init();
+    onDragPickerAddress(result) {
+      this.address = result.address;
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scope>
 .dankal-card {
   margin-bottom: 10px;
+}
+
+.message-line {
+  display: inline-block;
+  padding: 10px 0px 0px;
 }
 </style>

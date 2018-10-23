@@ -34,8 +34,6 @@ export default {
         loading.hide();
       });
     // eslint-disable-next-line
-    Vue.prototype.$loading = $loading;
-    // eslint-disable-next-line
-    Vue.loading = $loading;
+    Vue.loading = Vue.prototype.$loading = $loading;
   },
 };

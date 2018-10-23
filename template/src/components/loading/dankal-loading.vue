@@ -5,6 +5,7 @@
   >
     <div
       class="modal"
+      :style="{'background-color': color}"
     />
     <img
       class="loading-animation"
@@ -24,8 +25,12 @@ export default {
   },
 
   created() {
-    if (this.icon) {
-      this.icon = '';
+    if (!this.image) {
+      this.image = '';
+    }
+
+    if (!this.color) {
+      this.color = 'rgba(255, 255, 255, 0.8)';
     }
   },
 

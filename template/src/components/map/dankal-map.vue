@@ -1,6 +1,7 @@
 <template>
   <section class="amap">
-    <div :id="identifier" />
+    <div :id="identifier"/>
+    <slot/>
   </section>
 </template>
 
@@ -33,24 +34,15 @@ export default {
         zoom: 13,
       }),
     },
-
-    city: {
-      type: String,
-      default: '',
-    },
-
-    hook: {
-      type: Function,
-      default: () => () => {},
-    },
   },
-
-  created() {},
 
   async mounted() {
     // 高德地图 SDK 的核心库
     if (!window.AMap) {
-      const src = `https://webapi.amap.com/maps?v=${this.initial.version || '1.4.6'}&key=${this.initial.key}`;
+      const { version, key } = this.initial;
+      // eslint-disable-next-line
+      const src = `https://webapi.amap.com/maps?v=${version ||
+        '1.4.6'}&key=${key}`;
       const loader = new ScriptLoader(src);
       await loader.load();
     }
@@ -62,16 +54,25 @@ export default {
       await loader.load();
     }
 
-    const { identifier, city } = this;
+    const { identifier } = this;
 
     this.map = new window.AMap.Map(identifier, this.config);
-    this.map.setCity(city);
 
-    // 设置钩子函数，便于控制权的转移
-    this.hook(this.map);
+    this.map.on('complete', () => {
+      console.log('====================================');
+      console.log('dala');
+      console.log('====================================');
+      this.onInitialChildren();
+    });
   },
 
   methods: {
+    onInitialChildren() {
+      this.$children.forEach(child => {
+        child.onComponentInitial();
+      });
+    },
+
     handlerLocation(address) {
       return new Promise((resolve, reject) => {
         if (window.AMap) reject();
@@ -83,7 +84,7 @@ export default {
               resolve(result);
             }
             reject();
-          })
+          });
         });
       });
     },
@@ -99,7 +100,7 @@ export default {
               resolve(result);
             }
             reject();
-          })
+          });
         });
       });
     },

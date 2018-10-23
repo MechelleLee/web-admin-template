@@ -2,9 +2,7 @@
   <div
     class="header-container"
   >
-    <div
-      class="router-view"
-    >
+    <div class="router-view">
       <el-breadcrumb
         separator-class="el-icon-arrow-right"
         separator=">"
@@ -19,9 +17,7 @@
         </el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <div
-      class="admin-right"
-    >
+    <div class="admin-right">
       <img
         class="admin-head"
         width="32px"

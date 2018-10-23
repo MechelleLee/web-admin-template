@@ -103,7 +103,7 @@ export default [
             url: '/example-management',
           },
           {
-            name: '表单设计',
+            name: '插件设计',
             url: '/example-plugins',
           },
         ],

@@ -24,6 +24,7 @@ Vue.use(ElementUI);
 Vue.use(Loading, {
   // eslint-disable-next-line
   icon: require('./assets/images/loading.gif'),
+  color: 'rgba(51, 51, 51, 0.8)',
 });
 
 // component, 注册全局组件

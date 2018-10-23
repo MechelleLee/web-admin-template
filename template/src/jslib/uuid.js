@@ -1,5 +1,11 @@
-// eslint-disable-next-line
-const sequence = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+/**
+ * @author zhi
+ * @description 用于生成组件的UUID
+ */
+
+const sequence = () =>
+  // eslint-disable-next-line
+  (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 
 const uuid = (prefix = 'code', level = 4) => {
   const temp = [];

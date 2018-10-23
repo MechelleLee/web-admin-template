@@ -1,5 +1,4 @@
-import Vue from 'vue'
-import env from '../configs/env'
+import Vue from 'vue';
+import { ImageDomain } from '../configs/env';
 
-const { imgDomain } = env
-Vue.filter('imgMapper', value => imgDomain + value)
+Vue.filter('imgMapper', value => ImageDomain + value);

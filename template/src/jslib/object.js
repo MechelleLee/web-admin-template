@@ -1,3 +1,8 @@
+/**
+ * @author zhi
+ * @description 封装一些常用的对象操作方法
+ */
+
 /* eslint-disable */
 /**
  *
