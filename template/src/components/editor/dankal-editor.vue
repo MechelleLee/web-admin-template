@@ -2,10 +2,15 @@
   <section class="dankal-edtior">
     <div ref="toolbar" />
     <div
-      class="dankal-editor-content"
-      ref="container"
-      :style="{height: height}"
-    />
+      class="dankal-editor-container"
+      :style="{'min-height': height}"
+    >
+      <div
+        class="dankal-edtior-content"
+        ref="container"
+        :style="{width: width}"
+      />
+    </div>
   </section>
 </template>
 
@@ -17,7 +22,7 @@ export default {
   data() {
     return {
       editor: null,
-    }
+    };
   },
 
   props: {
@@ -25,6 +30,10 @@ export default {
       type: String,
       default: '',
       require: true,
+    },
+    width: {
+      type: String,
+      default: '1024px',
     },
     height: {
       type: String,
@@ -50,9 +59,9 @@ export default {
       plugins: DecoupledEditor.builtinPlugins.concat(plugins),
     });
 
-    DecoupledEditor
-      .create(this.$refs.container, config)
-      .then((editor) => {
+    DecoupledEditor.create(this.$refs.container, config)
+      // eslint-disable-next-line
+      .then(editor => {
         const toolbarContainer = self.$refs.toolbar;
         toolbarContainer.appendChild(editor.ui.view.toolbar.element);
 
@@ -77,11 +86,23 @@ export default {
       this.$emit('input', value);
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scope>
-.dankal-editor-content {
-  border: 1px solid #c4c4c4 !important;
+.dankal-editor-container {
+  background-color: #fafafa;
+  border: 1px solid #c4c4c4;
+}
+
+.dankal-edtior-content {
+  border: 0px !important;
+  outline: 0px;
+
+  background-color: #ffffff;
+  margin: 20px auto;
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.08),
+    2px -2px 4px 0 rgba(0, 0, 0, 0.08), -2px -2px 4px 0 rgba(0, 0, 0, 0.08),
+    -2px 2px 4px 0 rgba(0, 0, 0, 0.08) !important;
 }
 </style>

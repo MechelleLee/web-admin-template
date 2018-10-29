@@ -1,15 +1,14 @@
 <style lang="scss">
 @import 'assets/styles/reset.scss';
 @import 'assets/styles/app.scss';
+@import 'assets/styles/theme.scss';
 </style>
 
 <template>
-  <router-view/>
+  <router-view />
 </template>
 
 <script>
-
-
 export default {
   name: 'App',
 };

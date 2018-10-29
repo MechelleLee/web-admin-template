@@ -7,6 +7,8 @@ import Operation from '@/vuepage/example/operation-filter';
 import ExampleForm from '@/vuepage/example/form';
 import ExampleTree from '@/vuepage/example/tree';
 import ExampleMap from '@/vuepage/example/map';
+import ExamplePlugins from '@/vuepage/example/plugins';
+import ExampleTimeAxis from '../vuepage/example/time-axis';
 
 export default [
   {
@@ -32,7 +34,7 @@ export default [
             url: '/example-management',
           },
           {
-            name: '富文本编辑',
+            name: '文本设计',
             url: '',
           },
         ],
@@ -74,7 +76,7 @@ export default [
             url: '/example-management',
           },
           {
-            name: '表单设计',
+            name: '树形设计',
             url: '/example-tree',
           },
         ],
@@ -88,8 +90,36 @@ export default [
             url: '/example-management',
           },
           {
-            name: '表单设计',
+            name: '地图选址',
             url: '/example-map',
+          },
+        ],
+      },
+      {
+        path: 'example-plugins',
+        component: ExamplePlugins,
+        meta: [
+          {
+            name: '样例管理',
+            url: '/example-management',
+          },
+          {
+            name: '插件设计',
+            url: '/example-plugins',
+          },
+        ],
+      },
+      {
+        path: 'example-time-axis',
+        component: ExampleTimeAxis,
+        meta: [
+          {
+            name: '样例管理',
+            url: '/example-management',
+          },
+          {
+            name: '轴型设计',
+            url: '/example-time-axis',
           },
         ],
       },

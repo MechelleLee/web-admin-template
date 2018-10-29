@@ -22,7 +22,6 @@
   color: $color;
   line-height: $line-height;
 }
-
 @mixin flex-container(
   $flex-direction: row,
   $align-items: center,
@@ -32,4 +31,15 @@
   flex-direction: $flex-direction;
   align-items: $align-items;
   justify-content: $justify-content;
+}
+@mixin button(
+  $background-color: $button-color,
+  $color: #ffffff,
+  $border: 0px,
+  $outline: 0px
+) {
+  background-color: $background-color;
+  color: $color;
+  border: $border;
+  outline: $outline;
 }

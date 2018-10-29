@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <table-pagination
+    <dankal-table
       :config="config"
       :datasource="datasource"
       @change-page="handlerPageChange"
@@ -18,18 +18,16 @@
               type="primary"
               plain
               @click="handlerNavigator(scope)"
-            >
-              详情
-            </el-button>
+            >详情</el-button>
           </div>
         </template>
       </el-table-column>
-    </table-pagination>
+    </dankal-table>
   </section>
 </template>
 
 <script>
-import TablePagination from '@/components/table-pagination';
+import DankalTable from '@/components/table/dankal-table';
 
 export default {
   data() {
@@ -48,7 +46,7 @@ export default {
         total: 1,
         data: [
           {
-            name: '富文本编辑器',
+            name: '文本设计',
             alias: 'editor',
           },
           {
@@ -63,14 +61,25 @@ export default {
             name: '地图选址',
             alias: 'map',
           },
+          {
+            name: '插件设计',
+            alias: 'plugins',
+          },
+          {
+            name: '轴型设计',
+            alias: 'time-axis',
+          },
         ],
       },
     };
   },
 
   components: {
-    TablePagination,
+    DankalTable,
   },
+
+  mounted() {},
+
   methods: {
     // eslint-disable-next-line no-unused-vars
     handlerPageChange(data) {
@@ -93,5 +102,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.container {
+  height: var(--dankal-body-height);
+}
 </style>

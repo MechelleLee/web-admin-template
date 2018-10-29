@@ -1,65 +1,88 @@
 /**
- * Created by IvanCai on 2017/4/19.
- * Modified by Zhi on 2018/7/8.
+ * @author IvanCai
+ * @description 自定义 axios 请求器
  */
 import axios from 'axios';
+
 import utils from './dk-utils';
+import { Domain } from '../configs/env';
 
-import env from '../configs/env';
-
-const dkAxios = axios.create({
-  baseURL: env.apiDomain,
-  timeout: 10000, // 设置超时时间
+const DKAxios = axios.create({
+  baseURL: Domain,
+  // 设置超时时间
+  timeout: 5000,
 });
 
-let loading;
+let timer;
 
-dkAxios.interceptors.request.use(
-  (config) => {
-    const token = utils.getCookie('projectName_token');
+DKAxios.interceptors.request.use(
+  // eslint-disable-next-line
+  config => {
+    const token = utils.getCookie('token');
+
     if (token) {
-      const { headers } = config;
-
-      // eslint-disable-next-line
-      config.headers = Object.assign({}, headers, {
-        token,
+      Object.assign(config.headers, {
+        'X-Access-Token': token,
       });
     }
 
-    loading = window.vm.$loading({
-      lock: true,
-      text: 'Loading',
-      spinner: 'el-icon-loading',
-      background: 'rgba(0, 0, 0, 0.7)',
-    });
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    // 配置延时 Loading， 解决请求响应快的闪烁问题
+    timer = setTimeout(() => {
+      window.vm.$loading();
+    }, 750);
 
     return config;
   },
 
-  error => Promise.reject(error),
+  // eslint-disable-next-line
+  error => {
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    window.vm.$loading.close();
+
+    return Promise.reject(error);
+  },
 );
 
-dkAxios.interceptors.response.use(
-  (response) => {
-    loading.close();
+DKAxios.interceptors.response.use(
+  // eslint-disable-next-line
+  response => {
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    window.vm.$loading.close();
+
     return response;
   },
 
   // eslint-disable-next-line
   error => {
-    loading.close();
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    window.vm.$loading.close();
+
+    if (!error.response) return;
 
     const { status, data } = error.response;
 
     switch (status) {
       case 401:
-        window.vm.$router.replace('/login');
+      case 412:
+        utils.setCookie('token', '', -1);
         break;
       default:
-        window.vm.$message(data.error.message);
-        return Promise.reject(error);
+        Promise.reject(data);
     }
   },
 );
 
-export default dkAxios;
+export default DKAxios;

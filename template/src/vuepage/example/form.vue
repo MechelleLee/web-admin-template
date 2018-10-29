@@ -1,6 +1,10 @@
 <template>
-  <section class="container">
-    <dankal-card :style="{width: '300px'}">
+  <section
+    class="container"
+  >
+    <dankal-card
+      :style="{width: '300px'}"
+    >
       <div>
         <h4>基于 label 实现复选框</h4>
       </div>
@@ -13,18 +17,20 @@
           :key="index"
           :label="item"
         >
-          <template slot-scope="scope">
+          <template
+            slot-scope="scope"
+          >
             <span
               class="dankal-checkbox-container"
               :class="{checked: scope.checked}"
-            >
-              {{ scope.data }}
-            </span>
+            >{{ scope.data }}</span>
           </template>
         </dankal-checkbox>
       </dankal-checkbox-group>
     </dankal-card>
-    <dankal-card :style="{width: '300px'}">
+    <dankal-card
+      :style="{width: '300px'}"
+    >
       <dankal-upload
         v-model="images"
         :accept="accept"
@@ -43,15 +49,23 @@
             class="upload-image"
           >
         </template>
-        <template slot-scope="scope">
-          <div class="upload-block">
-            <i class="el-icon-upload" />
+        <template
+          slot-scope="scope"
+        >
+          <div
+            class="upload-block"
+          >
+            <i
+              class="el-icon-upload"
+            />
             <span>文件上传</span>
           </div>
         </template>
       </dankal-upload>
     </dankal-card>
-    <dankal-card :style="{width: '300px'}">
+    <dankal-card
+      :style="{width: '300px'}"
+    >
       <dankal-upload
         v-model="images"
         :accept="accept"
@@ -73,9 +87,15 @@
             class="upload-image"
           >
         </template>
-        <template slot-scope="scope">
-          <div class="upload-block multiple">
-            <i class="el-icon-upload" />
+        <template
+          slot-scope="scope"
+        >
+          <div
+            class="upload-block multiple"
+          >
+            <i
+              class="el-icon-upload"
+            />
           </div>
         </template>
       </dankal-upload>
@@ -103,7 +123,7 @@ export default {
       token: '',
       domain: '',
       images: [],
-    }
+    };
   },
 
   components: {
@@ -148,10 +168,10 @@ export default {
           self.domain = data.url;
           self.token = data.token;
         },
-      }
+      };
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

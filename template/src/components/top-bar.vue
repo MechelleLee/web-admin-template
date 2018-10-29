@@ -3,14 +3,13 @@
     <div class="router-view">
       <el-breadcrumb
         separator-class="el-icon-arrow-right"
-        separator=">">
+        separator=">"
+      >
         <el-breadcrumb-item
           v-for="(item, index) in $route.meta"
-          :key="index">
-          <span
-            @click="changeRouter(item.url)">
-            \{{ item.name }}
-          </span>
+          :key="index"
+        >
+          <span @click="changeRouter(item.url)">\{{ item.name }}</span>
         </el-breadcrumb-item>
       </el-breadcrumb>
     </div>
@@ -18,19 +17,22 @@
       <img
         class="admin-head"
         width="32px"
-        src="../assets/images/dog.jpg">
+        src="../assets/images/dog.jpg"
+      >
       <el-dropdown
         @command="signOut"
-        trigger="click">
+        trigger="click"
+      >
         <span class="el-dropdown-link">
           admin
-          <i class="el-icon-arrow-down el-icon--right"/>
+          <i class="el-icon-arrow-down el-icon--right" />
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>
             <img
               src="../assets/images/logout.png"
-              class="dk-icon-back">
+              class="dk-icon-back"
+            >
             退出
           </el-dropdown-item>
         </el-dropdown-menu>
@@ -40,7 +42,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {};
@@ -54,7 +55,7 @@ export default {
       this.$router.push({ path: url });
     },
     signOut() {
-      this.$router.push({ path: '/login' })
+      this.$router.push({ path: '/login' });
     },
   },
 };
@@ -62,18 +63,18 @@ export default {
 
 <style lang="scss">
 .header-container {
-  padding:0 57px 0 30px;
-  height: 73px;
+  padding: 0 57px 0 30px;
+  height: var(--dankal-head-height);
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
   margin: 0;
+
   .search-row {
     width: 100%;
   }
-  .router-view {
-  }
+
   .filter-view {
     display: flex;
     padding-right: 25px;
@@ -85,11 +86,13 @@ export default {
       margin: 0 15px;
     }
   }
-  .admin-right{
+
+  .admin-right {
+    cursor: pointer;
     height: 100%;
     display: flex;
     align-items: center;
-    .admin-head{
+    .admin-head {
       width: 32px;
       height: 32px;
       border-radius: 50%;
@@ -97,6 +100,7 @@ export default {
     }
   }
 }
+
 .dk-icon-back {
   display: inline-block;
   width: 14px;
@@ -107,14 +111,15 @@ export default {
 .top-search-input {
   width: 220px;
   margin: 0 10px;
+
   .search-icon {
     width: 36px !important;
     height: 36px !important;
     padding: 10px 11px !important;
   }
+
   .search-row {
     margin-bottom: 30px;
   }
 }
-
 </style>

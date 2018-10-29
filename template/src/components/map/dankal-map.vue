@@ -1,80 +1,107 @@
 <template>
   <section class="amap">
-    <div id="container" />
+    <div :id="identifier" />
+    <slot />
   </section>
 </template>
 
 <script>
+import Uuid from '../../jslib/uuid';
+
 export default {
   data() {
     return {
+      identifier: Uuid('dankal'),
       map: null,
-      markers: [],
+      // markers: [],
     };
   },
 
   props: {
-    postion: {
+    config: {
       type: Object,
-      default: () => {},
-      required: false,
+      default: () => ({
+        resizeEnable: true,
+        zoom: 13,
+      }),
     },
-    city: {
-      type: String,
+    position: {
+      type: [String, Array],
       default: '',
-    },
-    zoom: {
-      type: Number,
-      default: 13,
-    },
-    longitude: {
-      type: String,
-      default: '',
-    },
-    dimension: {
-      type: String,
-      default: '',
-    },
-    // 启用事件
-    getPostion: {
-      type: Boolean,
-      default: false,
     },
   },
 
-  created() {},
+  async mounted() {
+    // 高德地图 SDK 的 UI 库
+    const { identifier } = this;
 
-  mounted() {
-    const element = document.createElement('script');
-    element.src = 'https://webapi.amap.com/maps?v=1.4.6&key=a4e1f4591bf569936909fefb25663508&plugin=AMap.Geocoder';
-    document.head.appendChild(element);
-    console.log('====================================');
-    console.log(window.AMap);
-    console.log('====================================');
+    const config = await this.onComponentInitial();
 
-    // this.map = new window.AMap.Map('container', {
-    //   resizeEnable: true,
-    //   zoom: 13,
-    // });
+    this.map = new window.AMap.Map(identifier, config);
 
-    // this.map.setCity('深圳市');
+    this.map.on('complete', () => {
+      this.onInitialChildren();
+    });
   },
 
   methods: {
-    marker(longitude, latitude) {
-      const marker = new window.AMap.Marker({
-        map: this.map,
-        position: [longitude, latitude],
+    async onComponentInitial() {
+      const { config, position } = this;
+
+      if (!position) {
+        return config;
+      }
+
+      if (position instanceof Array) {
+        return Object.assign({}, this.config, { center: position });
+      }
+
+      const result = await this.handlerLocation(position);
+
+      return Object.assign({}, this.config, {
+        center: [
+          result.geocodes[0].location.lng,
+          result.geocodes[0].location.lat,
+        ],
       });
-      this.markers.push(marker);
-      this.map.setFitView();
     },
 
-    clear() {
-      this.markers.forEach((item) => {
-        this.map.remove(item);
+    onInitialChildren() {
+      // eslint-disable-next-line
+      this.$children.forEach(child => {
+        child.onComponentInitial();
       });
-      this.markers = [];
+    },
+
+    handlerLocation(address) {
+      return new Promise((resolve, reject) => {
+        if (!window.AMap) reject();
+        window.AMap.plugin('AMap.Geocoder', () => {
+          const geocoder = new window.AMap.Geocoder();
+          geocoder.getLocation(address, (status, result) => {
+            if (status === 'complete' && result.info === 'OK') {
+              resolve(result);
+            }
+            reject();
+          });
+        });
+      });
+    },
+
+    handlerAddress(lnglat) {
+      return new Promise((resolve, reject) => {
+        if (window.AMap) reject();
+        window.AMap.plugin('AMap.Geocoder', () => {
+          const geocoder = new window.AMap.Geocoder();
+
+          geocoder.getAddress(lnglat, (status, result) => {
+            if (status === 'complete' && result.info === 'OK') {
+              resolve(result);
+            }
+            reject();
+          });
+        });
+      });
     },
   },
 };

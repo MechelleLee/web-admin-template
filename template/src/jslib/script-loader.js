@@ -29,7 +29,7 @@ export default class ScriptLoader {
     const element = document.createElement(tag);
     element.type = type;
     element.defer = true;
-    element.async = true;
+    // element.async = true;
     element.src = url;
     document.head.appendChild(element);
 
@@ -38,12 +38,14 @@ export default class ScriptLoader {
         setTimeout(resolve);
       };
 
-      element.onerror = error => reject(
-        Object.assign(error, {
-          type: 'loader',
-          message: 'the resource of script is load failure',
-        }),
-      );
+      element.onerror = error =>
+        // eslint-disable-next-line
+        reject(
+          Object.assign(error, {
+            type: 'loader',
+            message: 'the resource of script is load failure',
+          }),
+        );
     });
   }
 
@@ -55,7 +57,8 @@ export default class ScriptLoader {
     if (/^http:/.test(url) && !status) {
       throw Object.assign(new Error(), {
         type: 'loader',
-        message: "this is safety problem, please don't use the script of http in the site of https",
+        message:
+          "this is safety problem, please don't use the script of http in the site of https",
       });
     }
   }
