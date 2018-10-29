@@ -38,6 +38,8 @@
   $border: 0px,
   $outline: 0px
 ) {
+  cursor: pointer;
+
   background-color: $background-color;
   color: $color;
   border: $border;

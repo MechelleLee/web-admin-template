@@ -18,3 +18,12 @@ export const getCloudsToken = () =>
     url: '/app/communal/qiniu',
     method: 'GET',
   });
+
+// eslint-disable-next-line
+export const getDownloadFile = url => {
+  return axios({
+    url,
+    method: 'GET',
+    responseType: 'arraybuffer',
+  });
+};

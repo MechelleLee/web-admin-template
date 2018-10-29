@@ -1,10 +1,15 @@
 <template>
-  <section
-    class="container"
-  >
-    <dankal-card
-      :style="{width: '300px'}"
-    >
+  <section class="container">
+    <dankal-card>
+      <dankal-download
+        :type="type"
+        :href="href"
+        :download="this.network().getDownloadFile"
+      >
+        <span class="download-button">DOWNLOAD</span>
+      </dankal-download>
+    </dankal-card>
+    <dankal-card>
       <div>
         <h4>基于 label 实现复选框</h4>
       </div>
@@ -12,25 +17,29 @@
         v-model="group"
         :limit="limit"
       >
-        <dankal-checkbox
-          v-for="(item, index) in [1, 2, 3, 4, 5, 6]"
-          :key="index"
-          :label="item"
-        >
-          <template
-            slot-scope="scope"
+        <div class="dankal-checkbox-layout-container">
+          <div
+            class="dankal-checkbox-layout-block"
+            v-for="i in [1, 2, 3, 4, 5]"
+            :key="i"
           >
-            <span
-              class="dankal-checkbox-container"
-              :class="{checked: scope.checked}"
-            >{{ scope.data }}</span>
-          </template>
-        </dankal-checkbox>
+            <dankal-checkbox
+              v-for="(item, index) in source"
+              :key="index"
+              :label="item"
+            >
+              <template slot-scope="scope">
+                <span
+                  class="dankal-checkbox-container"
+                  :class="{checked: scope.checked}"
+                >{{ scope.data }}</span>
+              </template>
+            </dankal-checkbox>
+          </div>
+        </div>
       </dankal-checkbox-group>
     </dankal-card>
-    <dankal-card
-      :style="{width: '300px'}"
-    >
+    <dankal-card :style="{width: '300px'}">
       <dankal-upload
         v-model="images"
         :accept="accept"
@@ -49,23 +58,15 @@
             class="upload-image"
           >
         </template>
-        <template
-          slot-scope="scope"
-        >
-          <div
-            class="upload-block"
-          >
-            <i
-              class="el-icon-upload"
-            />
+        <template slot-scope="scope">
+          <div class="upload-block">
+            <i class="el-icon-upload" />
             <span>文件上传</span>
           </div>
         </template>
       </dankal-upload>
     </dankal-card>
-    <dankal-card
-      :style="{width: '300px'}"
-    >
+    <dankal-card :style="{width: '300px'}">
       <dankal-upload
         v-model="images"
         :accept="accept"
@@ -87,15 +88,9 @@
             class="upload-image"
           >
         </template>
-        <template
-          slot-scope="scope"
-        >
-          <div
-            class="upload-block multiple"
-          >
-            <i
-              class="el-icon-upload"
-            />
+        <template slot-scope="scope">
+          <div class="upload-block multiple">
+            <i class="el-icon-upload" />
           </div>
         </template>
       </dankal-upload>
@@ -110,19 +105,50 @@ import DankalInput from '@/components/input/dankal-input';
 import DankalCheckbox from '@/components/checkbox/dankal-checkbox';
 import DankalCheckboxGroup from '@/components/checkbox/dankal-checkbox-group';
 import DankalUpload from '@/components/upload/dankal-upload';
+import DankalDownload from '@/components/download/dankal-download';
 
 // API引入
-import { getCloudsToken, getImageUpload } from '@/api/example';
+import { getCloudsToken, getImageUpload, getDownloadFile } from '@/api/example';
+import { MIME } from '@/jslib/variables';
 
 export default {
   data() {
     return {
       group: [],
-      limit: 2,
+      limit: 10,
       accept: ['image/png', 'image/jpeg'],
       token: '',
       domain: '',
       images: [],
+      source: [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+      ],
+      href:
+        'http://img.hb.aicdn.com/6c10143d78edcdd07fdc1af88de2629897e393b324ab4c-TuUb0h_fw658',
+      type: MIME.jpg,
     };
   },
 
@@ -132,6 +158,7 @@ export default {
     DankalCheckbox,
     DankalCheckboxGroup,
     DankalUpload,
+    DankalDownload,
   },
 
   created() {
@@ -168,6 +195,10 @@ export default {
           self.domain = data.url;
           self.token = data.token;
         },
+
+        getDownloadFile(href) {
+          return getDownloadFile(href);
+        },
       };
     },
   },
@@ -176,15 +207,28 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../assets/styles/mixins.scss';
+
 .container {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .dankal-card {
   margin-bottom: 10px;
   margin-right: 10px;
+}
+
+.dankal-checkbox-layout-container {
+  @include flex-container($justify-content: center);
+}
+
+.dankal-checkbox-layout-block {
+  display: inline-block;
+  width: 300px;
+}
+
+.dankal-checkbox-layout-block + .dankal-checkbox-layout-block {
+  margin-left: 20px;
 }
 
 .dankal-checkbox-container {
@@ -230,5 +274,16 @@ export default {
 
 .upload-image {
   height: 178px;
+}
+
+.dankal-download {
+  text-align: right;
+}
+
+.download-button {
+  @include button;
+  text-align: right;
+  padding: 10px 20px;
+  border-radius: 2px;
 }
 </style>

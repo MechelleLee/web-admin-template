@@ -16,6 +16,5 @@ export const MIME = {
   gif: 'image/gif',
   ppt: 'application/vnd.ms-powerpoint',
   zip: 'application/zip',
-  '7z': 'application/x-7z-compressed',
   wps: 'application/kswps',
 };
