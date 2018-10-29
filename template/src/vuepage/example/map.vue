@@ -1,16 +1,23 @@
 <template>
   <section class="container">
     <dankal-card>
-      <dankal-map
-        :initial="initial"
-      >
-        <dankal-map-position-picker
-          @success="onDragPickerAddress"
-        />
+      <dankal-map position="南京市栖霞区仙林大道163号">
+        <dankal-map-position-picker @success="onDragPickerAddress" />
+        <dankal-map-control />
       </dankal-map>
-      <span
-        class="message-line"
-      >{{ address }}</span>
+      <div class="address-block">
+        <i class="el-icon-location" />
+        <span class="message-line">{{ address }}</span>
+      </div>
+    </dankal-card>
+    <dankal-card>
+      <dankal-map>
+        <dankal-map-geolocation @complete="onGetPositionComplete" />
+      </dankal-map>
+      <div class="address-block">
+        <i class="el-icon-location" />
+        <span class="message-line">{{ position }}</span>
+      </div>
     </dankal-card>
   </section>
 </template>
@@ -19,22 +26,24 @@
 import DankalCard from '@/components/card/dankal-card';
 
 import DankalMap from '@/components/map/dankal-map';
+import DankalMapControl from '@/components/map/dankal-map-control';
 import DankalMapPositionPicker from '@/components/map/dankal-map-position-picker';
+import DankalMapGeolocation from '@/components/map/dankal-map-geolocation';
 
 export default {
   data() {
     return {
-      initial: {
-        key: 'a4e1f4591bf569936909fefb25663508',
-      },
       address: '',
+      position: '',
     };
   },
 
   components: {
     DankalCard,
     DankalMap,
+    DankalMapControl,
     DankalMapPositionPicker,
+    DankalMapGeolocation,
   },
 
   mounted() {},
@@ -43,6 +52,10 @@ export default {
     onDragPickerAddress(result) {
       this.address = result.address;
     },
+
+    onGetPositionComplete(result) {
+      this.position = result.formattedAddress;
+    },
   },
 };
 </script>
@@ -50,6 +63,10 @@ export default {
 <style lang="scss" scope>
 .dankal-card {
   margin-bottom: 10px;
+}
+
+.address-block {
+  text-align: right;
 }
 
 .message-line {

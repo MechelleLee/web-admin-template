@@ -1,12 +1,11 @@
 <template>
   <section class="amap">
-    <div :id="identifier"/>
-    <slot/>
+    <div :id="identifier" />
+    <slot />
   </section>
 </template>
 
 <script>
-import ScriptLoader from '../../jslib/script-loader';
 import Uuid from '../../jslib/uuid';
 
 export default {
@@ -19,14 +18,6 @@ export default {
   },
 
   props: {
-    initial: {
-      type: Object,
-      default: () => ({
-        version: '1.4.6',
-        key: '',
-      }),
-    },
-
     config: {
       type: Object,
       default: () => ({
@@ -34,40 +25,49 @@ export default {
         zoom: 13,
       }),
     },
+    position: {
+      type: [String, Array],
+      default: '',
+    },
   },
 
   async mounted() {
-    // 高德地图 SDK 的核心库
-    if (!window.AMap) {
-      const { version, key } = this.initial;
-      // eslint-disable-next-line
-      const src = `https://webapi.amap.com/maps?v=${version ||
-        '1.4.6'}&key=${key}`;
-      const loader = new ScriptLoader(src);
-      await loader.load();
-    }
-
     // 高德地图 SDK 的 UI 库
-    if (!window.AMapUI) {
-      const src = 'https://webapi.amap.com/ui/1.0/main.js?v=1.0.11';
-      const loader = new ScriptLoader(src);
-      await loader.load();
-    }
-
     const { identifier } = this;
 
-    this.map = new window.AMap.Map(identifier, this.config);
+    const config = await this.onComponentInitial();
+
+    this.map = new window.AMap.Map(identifier, config);
 
     this.map.on('complete', () => {
-      console.log('====================================');
-      console.log('dala');
-      console.log('====================================');
       this.onInitialChildren();
     });
   },
 
   methods: {
+    async onComponentInitial() {
+      const { config, position } = this;
+
+      if (!position) {
+        return config;
+      }
+
+      if (position instanceof Array) {
+        return Object.assign({}, this.config, { center: position });
+      }
+
+      const result = await this.handlerLocation(position);
+
+      return Object.assign({}, this.config, {
+        center: [
+          result.geocodes[0].location.lng,
+          result.geocodes[0].location.lat,
+        ],
+      });
+    },
+
     onInitialChildren() {
+      // eslint-disable-next-line
       this.$children.forEach(child => {
         child.onComponentInitial();
       });
@@ -75,10 +75,9 @@ export default {
 
     handlerLocation(address) {
       return new Promise((resolve, reject) => {
-        if (window.AMap) reject();
+        if (!window.AMap) reject();
         window.AMap.plugin('AMap.Geocoder', () => {
           const geocoder = new window.AMap.Geocoder();
-
           geocoder.getLocation(address, (status, result) => {
             if (status === 'complete' && result.info === 'OK') {
               resolve(result);

@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="header-container"
-  >
+  <div class="header-container">
     <div class="router-view">
       <el-breadcrumb
         separator-class="el-icon-arrow-right"
@@ -11,9 +9,7 @@
           v-for="(item, index) in $route.meta"
           :key="index"
         >
-          <span
-            @click="changeRouter(item.url)"
-          >\{{ item.name }}</span>
+          <span @click="changeRouter(item.url)">\{{ item.name }}</span>
         </el-breadcrumb-item>
       </el-breadcrumb>
     </div>
@@ -27,17 +23,11 @@
         @command="signOut"
         trigger="click"
       >
-        <span
-          class="el-dropdown-link"
-        >
+        <span class="el-dropdown-link">
           admin
-          <i
-            class="el-icon-arrow-down el-icon--right"
-          />
+          <i class="el-icon-arrow-down el-icon--right" />
         </span>
-        <el-dropdown-menu
-          slot="dropdown"
-        >
+        <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>
             <img
               src="../assets/images/logout.png"
@@ -74,15 +64,17 @@ export default {
 <style lang="scss">
 .header-container {
   padding: 0 57px 0 30px;
-  height: 73px;
+  height: var(--dankal-head-height);
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
   margin: 0;
+
   .search-row {
     width: 100%;
   }
+
   .filter-view {
     display: flex;
     padding-right: 25px;
@@ -94,6 +86,7 @@ export default {
       margin: 0 15px;
     }
   }
+
   .admin-right {
     cursor: pointer;
     height: 100%;
@@ -107,6 +100,7 @@ export default {
     }
   }
 }
+
 .dk-icon-back {
   display: inline-block;
   width: 14px;
@@ -117,11 +111,13 @@ export default {
 .top-search-input {
   width: 220px;
   margin: 0 10px;
+
   .search-icon {
     width: 36px !important;
     height: 36px !important;
     padding: 10px 11px !important;
   }
+
   .search-row {
     margin-bottom: 30px;
   }

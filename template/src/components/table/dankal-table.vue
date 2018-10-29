@@ -1,25 +1,28 @@
 <template>
-  <section class="container">
+  <section class="dankal-table">
     <el-table
       :data="datasource.data"
       border
-      style="width: 100%">
+      style="width: 100%"
+    >
       <el-table-column
         v-if="!_config.index"
         fixed
         type="index"
         :index="handlerSerial"
         label="ID"
-        align="center"/>
+        align="center"
+      />
       <el-table-column
         v-for="(item,index) in _config.fields"
         :key="index"
         :prop="item.prop"
-        :label="item.label"/>
+        :label="item.label"
+      />
       <!-- 数据处理插槽 -->
-      <slot name="filter"/>
+      <slot name="filter" />
       <!-- 操作栏插槽   -->
-      <slot name="action"/>
+      <slot name="action" />
     </el-table>
     <el-pagination
       v-if="_config.pagination"
@@ -29,14 +32,15 @@
       background
       layout="prev, pager, next"
       :total="datasource.total"
-      @current-change="handlerChange"/>
+      @current-change="handlerChange"
+    />
   </section>
 </template>
 
 <script>
 /* eslint-disable vue/no-reserved-keys,no-underscore-dangle */
 
-import object from '../jslib/object';
+import object from '../../jslib/object';
 
 export default {
   data() {
@@ -110,14 +114,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.dankal-table {
   position: relative;
   height: 100%;
   padding-bottom: 60px;
-
-  .el-table {
-    // margin-bottom: 60px;
-  }
 
   .el-pagination {
     position: absolute;

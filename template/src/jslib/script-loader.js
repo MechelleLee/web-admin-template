@@ -29,7 +29,7 @@ export default class ScriptLoader {
     const element = document.createElement(tag);
     element.type = type;
     element.defer = true;
-    element.async = true;
+    // element.async = true;
     element.src = url;
     document.head.appendChild(element);
 

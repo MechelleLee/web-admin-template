@@ -1,21 +1,26 @@
 <template>
   <section class="container">
-    <dankal-card
-      :hover="false"
-    >
-      <div
-        class="loading-block"
-      >
+    <dankal-card :hover="false">
+      <div class="plugin-block">
         <h3>Loading-Plugin</h3>
         <div>
-          <button
-            @click="onHandlerOpenLoadning"
-          >
+          <button @click="onHandlerOpenLoadning">
             <span>触发</span>
           </button>
-          <button
-            @click="onHandlerHideLoadning"
-          >
+          <button @click="onHandlerHideLoadning">
+            <span>隐藏</span>
+          </button>
+        </div>
+      </div>
+    </dankal-card>
+    <dankal-card :hover="false">
+      <div class="plugin-block">
+        <h3>Script-Plugin</h3>
+        <div>
+          <button @click="onHandlerOpenLoadning">
+            <span>触发</span>
+          </button>
+          <button @click="onHandlerHideLoadning">
             <span>隐藏</span>
           </button>
         </div>
@@ -42,7 +47,17 @@ export default {
     },
 
     onHandlerHideLoadning() {
-      window.vm.loading.hide();
+      window.vm.$loading.hide();
+    },
+
+    onHandlerLoadScripts() {
+      window.vm.$scripts({
+        scripts: [
+          'https://webapi.amap.com/maps?v=1.4.6&amp;key=a4e1f4591bf569936909fefb25663508',
+        ],
+        tag: 'script',
+        type: 'text/javascript',
+      });
     },
   },
 };
@@ -58,7 +73,11 @@ button {
   border-radius: 2px;
 }
 
-.loading-block {
+.dankal-card + .dankal-card {
+  margin-top: 10px;
+}
+
+.plugin-block {
   @include flex-container;
 }
 </style>

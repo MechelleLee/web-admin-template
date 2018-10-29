@@ -1,7 +1,5 @@
 <template>
-  <section
-    class="dankal-map-position-picker"
-  />
+  <section class="dankal-map-position-picker" />
 </template>
 
 <script>
@@ -35,9 +33,6 @@ export default {
     onComponentInitial() {
       const { map, mode } = this;
       if (map) {
-        console.log('====================================');
-        console.log('daad');
-        console.log('====================================');
         // eslint-disable-next-line
         window.AMapUI.loadUI(['misc/PositionPicker'], PositionPickerPlugin => {
           const picker = new PositionPickerPlugin({

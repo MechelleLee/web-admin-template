@@ -13,7 +13,6 @@ const DKAxios = axios.create({
   timeout: 5000,
 });
 
-let loading;
 let timer;
 
 DKAxios.interceptors.request.use(
@@ -33,11 +32,7 @@ DKAxios.interceptors.request.use(
 
     // 配置延时 Loading， 解决请求响应快的闪烁问题
     timer = setTimeout(() => {
-      loading = window.vm.$loading({
-        lock: true,
-        spinner: 'el-icon-loading',
-        background: 'rgba(255, 255, 255, 0.8)',
-      });
+      window.vm.$loading();
     }, 750);
 
     return config;
@@ -49,9 +44,8 @@ DKAxios.interceptors.request.use(
       clearTimeout(timer);
     }
 
-    if (loading) {
-      loading.close();
-    }
+    window.vm.$loading.close();
+
     return Promise.reject(error);
   },
 );
@@ -63,9 +57,8 @@ DKAxios.interceptors.response.use(
       clearTimeout(timer);
     }
 
-    if (loading) {
-      loading.close();
-    }
+    window.vm.$loading.close();
+
     return response;
   },
 
@@ -75,9 +68,7 @@ DKAxios.interceptors.response.use(
       clearTimeout(timer);
     }
 
-    if (loading) {
-      loading.close();
-    }
+    window.vm.$loading.close();
 
     if (!error.response) return;
 
