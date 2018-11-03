@@ -10,6 +10,16 @@
       </dankal-download>
     </dankal-card>
     <dankal-card>
+      <dankal-input
+        v-model="input.value"
+        mode="mobile"
+        :length="input.length"
+        :placeholder="input.placeholder"
+        :validate="input.validate"
+        @error="handleInputValidError"
+      />
+    </dankal-card>
+    <dankal-card>
       <div>
         <h4>基于 label 实现复选框</h4>
       </div>
@@ -111,9 +121,21 @@ import DankalDownload from '@/components/download/dankal-download';
 import { getCloudsToken, getImageUpload, getDownloadFile } from '@/api/example';
 import { MIME } from '@/jslib/variables';
 
+import Validate from '@/jslib/validate';
+
 export default {
   data() {
     return {
+      href:
+        'http://img.hb.aicdn.com/6c10143d78edcdd07fdc1af88de2629897e393b324ab4c-TuUb0h_fw658',
+      type: MIME.jpg,
+      input: {
+        placeholder: '请输入您的邮箱',
+        value: '',
+        length: 10,
+        validate: Validate.isEmail,
+      },
+      length: 10,
       group: [],
       limit: 10,
       accept: ['image/png', 'image/jpeg'],
@@ -146,9 +168,6 @@ export default {
         23,
         24,
       ],
-      href:
-        'http://img.hb.aicdn.com/6c10143d78edcdd07fdc1af88de2629897e393b324ab4c-TuUb0h_fw658',
-      type: MIME.jpg,
     };
   },
 
@@ -184,6 +203,12 @@ export default {
     handleImageBuilds(res) {
       const { hash } = res.data;
       return `${this.domain}/${hash}`;
+    },
+
+    handleInputValidError(error) {
+      console.log('====================================');
+      console.log(error);
+      console.log('====================================');
     },
 
     network() {
@@ -224,7 +249,7 @@ export default {
 
 .dankal-checkbox-layout-block {
   display: inline-block;
-  width: 300px;
+  max-width: 300px;
 }
 
 .dankal-checkbox-layout-block + .dankal-checkbox-layout-block {

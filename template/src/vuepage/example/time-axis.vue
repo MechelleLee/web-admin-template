@@ -1,60 +1,83 @@
 <template>
   <section class="container">
-    <!-- <dankal-time-axis :sources="sources">
-      <template
-        slot="time"
-        slot-scope="scope"
-      >
-        <dankal-card v-if="scope.item.time">
-          <span>{{ scope.item.time }}</span>
-        </dankal-card>
-      </template>
-      <template
-        slot="content"
-        slot-scope="scope"
-      >
-        <dankal-card>
-          <span>{{ scope.item.article }}</span>
-        </dankal-card>
-      </template>
-    </dankal-time-axis> -->
-    <dankal-time-axis :source="source">
-      <template
-        slot="side"
-        slot-scope="scope"
-      >
-        <div
-          v-if="scope.item.time"
-          class="side-block"
-        />
-      </template>
-      <template
-        slot="icon"
-        slot-scope="scope"
-      >
-        <i
+    <dankal-card>
+      <dankal-step :source="steps">
+        <template
+          slot="above"
+          slot-scope="scope"
+        >
+          <div
+            class="side-block"
+          />
+        </template>
+        <template
+          slot="cores"
+          slot-scope="scope"
+        >
+          <i class="el-icon-menu icon-block" />
+        </template>
+        <template
+          slot="below"
+          slot-scope="scope"
+        >
+          <div class="main-block" />
+        </template>
+      </dankal-step>
+    </dankal-card>
+    <dankal-card>
+      <dankal-time-axis :source="times">
+        <template
+          slot="side"
+          slot-scope="scope"
+        >
+          <div
+            v-if="scope.item.time"
+            class="side-block"
+          />
+        </template>
+        <template
           slot="icon"
-          class="el-icon-menu icon-block"
-        />
-      </template>
-      <template
-        slot="main"
-        slot-scope="scope"
-      >
-        <div class="main-block" />
-      </template>
-    </dankal-time-axis>
+          slot-scope="scope"
+        >
+          <i class="el-icon-menu icon-block" />
+        </template>
+        <template
+          slot="main"
+          slot-scope="scope"
+        >
+          <div class="main-block" />
+        </template>
+      </dankal-time-axis>
+    </dankal-card>
   </section>
 </template>
 
 <script>
 import DankalTimeAxis from '@/components/time-axis/dankal-time-axis';
 import DankalCard from '@/components/card/dankal-card';
+import DankalStep from '@/components/step/dankal-step';
 
 export default {
   data() {
     return {
-      source: [
+      steps: [
+        {
+          step: 'Data Initials',
+        },
+        {
+          step: 'Data Sortable',
+        },
+        {
+          step: 'Data Initials',
+        },
+        {
+          step: 'Data Initials',
+        },
+        {
+          step: 'Data Initials',
+        },
+      ],
+      times: [
         {
           article:
             '如果熟悉 react 的读者这里可能马上就会想到 HOC（高阶组件） 的概念，而且这也是 react 中一个很常见的模式，该模式能够提高 react 组件的复用程度和灵活性。在 vue 中，我们是否也有一些手段或特性来提高组件的复用程度和灵活性呢？答案当然是有的，那就是 mixin。',
@@ -90,11 +113,16 @@ export default {
   components: {
     DankalTimeAxis,
     DankalCard,
+    DankalStep,
   },
 };
 </script>
 
 <style lang="scss" scope>
+.dankal-card + .dankal-card {
+  margin-top: 10px;
+}
+
 .icon-block {
   width: 25px;
   height: 25px;
