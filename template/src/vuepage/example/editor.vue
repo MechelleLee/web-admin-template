@@ -14,6 +14,7 @@
 <script>
 import DankalEditor from '@/components/editor/dankal-editor';
 import DankalHtml from '@/components/html/dankal-html';
+
 import Mixins from '@/mixins/operations';
 
 import property from '@/configs/editor';
