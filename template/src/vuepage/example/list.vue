@@ -38,7 +38,7 @@ export default {
         fields: [
           {
             prop: 'name',
-            label: '名称',
+            label: '组件设计',
           },
         ],
       },
@@ -68,6 +68,10 @@ export default {
           {
             name: '轴型设计',
             alias: 'time-axis',
+          },
+          {
+            name: '图表设计',
+            alias: 'chart',
           },
         ],
       },

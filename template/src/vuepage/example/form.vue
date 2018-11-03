@@ -49,6 +49,25 @@
         </div>
       </dankal-checkbox-group>
     </dankal-card>
+    <dankal-card>
+      <div>
+        <h4>基于 label 实现单选框</h4>
+      </div>
+      <dankal-radio
+        v-for="(item, index) in radios"
+        :key="index"
+        :item="item"
+        :label="item"
+        v-model="radio"
+      >
+        <template slot-scope="scope">
+          <div class="dankal-radio-item">
+            <i :class="{checked: scope.checked}" />
+            <span>{{ scope.label }}</span>
+          </div>
+        </template>
+      </dankal-radio>
+    </dankal-card>
     <dankal-card :style="{width: '300px'}">
       <dankal-upload
         v-model="images"
@@ -112,8 +131,9 @@
 // 组件引入
 import DankalCard from '@/components/card/dankal-card';
 import DankalInput from '@/components/input/dankal-input';
-import DankalCheckbox from '@/components/checkbox/dankal-checkbox';
 import DankalCheckboxGroup from '@/components/checkbox/dankal-checkbox-group';
+import DankalCheckbox from '@/components/checkbox/dankal-checkbox';
+import DankalRadio from '@/components/radio/dankal-radio';
 import DankalUpload from '@/components/upload/dankal-upload';
 import DankalDownload from '@/components/download/dankal-download';
 
@@ -168,14 +188,22 @@ export default {
         23,
         24,
       ],
+      radios: [
+        'I like Angular',
+        'I like React',
+        "I don't like Vue",
+        'EmEm, Jquery, Do you use it now',
+      ],
+      radio: '',
     };
   },
 
   components: {
     DankalCard,
     DankalInput,
-    DankalCheckbox,
     DankalCheckboxGroup,
+    DankalCheckbox,
+    DankalRadio,
     DankalUpload,
     DankalDownload,
   },
@@ -244,7 +272,7 @@ export default {
 }
 
 .dankal-checkbox-layout-container {
-  @include flex-container($justify-content: center);
+  @include flex-container($justify-content: space-between);
 }
 
 .dankal-checkbox-layout-block {
@@ -275,6 +303,31 @@ export default {
   background: rgba(217, 33, 40, 1);
   color: #ffffff;
   border: 1px solid rgba(217, 33, 40, 1);
+}
+
+.dankal-radio + .dankal-radio {
+  margin-left: 20px;
+}
+
+.dankal-radio-item {
+  @include flex-container;
+
+  i {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 5px solid #a8a8a8;
+    transition: all 0.3s;
+  }
+
+  i.checked {
+    border: 5px solid #d70d18;
+  }
+
+  span {
+    margin-left: 5px;
+  }
 }
 
 .upload-block {

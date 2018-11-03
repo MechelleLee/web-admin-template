@@ -1,11 +1,13 @@
 <template>
   <section class="dankal-radio">
-    <label type="checkbox">
-      <input
-        type="radio"
-        v-model="status"
-      >
-      <slot />
+    <label
+      type="checkbox"
+      @click="handlerEmitValue"
+    >
+      <slot
+        :checked="checked"
+        :label="label"
+      />
     </label>
   </section>
 </template>
@@ -16,18 +18,36 @@ export default {
     return {};
   },
 
-  props: {},
+  props: {
+    value: {
+      type: [String, Number],
+      default: '',
+    },
+    label: {
+      type: [String, Number],
+      required: true,
+    },
+  },
 
-  mounted() {},
+  computed: {
+    checked() {
+      const { value, label } = this;
+      return value === label;
+    },
+  },
 
-  methods: {},
-
-  watch: {},
+  methods: {
+    handlerEmitValue() {
+      this.$emit('input', this.label);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.image-radio {
+.dankal-radio {
+  display: inline-block;
+
   input {
     display: none;
   }

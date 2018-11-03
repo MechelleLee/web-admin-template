@@ -8,7 +8,8 @@ import ExampleForm from '@/vuepage/example/form';
 import ExampleTree from '@/vuepage/example/tree';
 import ExampleMap from '@/vuepage/example/map';
 import ExamplePlugins from '@/vuepage/example/plugins';
-import ExampleTimeAxis from '../vuepage/example/time-axis';
+import ExampleTimeAxis from '@/vuepage/example/time-axis';
+import ExampleChart from '@/vuepage/example/chart';
 
 export default [
   {
@@ -120,6 +121,20 @@ export default [
           {
             name: '轴型设计',
             url: '/example-time-axis',
+          },
+        ],
+      },
+      {
+        path: 'example-chart',
+        component: ExampleChart,
+        meta: [
+          {
+            name: '样例管理',
+            url: '/example-management',
+          },
+          {
+            name: '轴型设计',
+            url: '/example-chart',
           },
         ],
       },
