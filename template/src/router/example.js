@@ -10,6 +10,7 @@ import ExampleMap from '@/vuepage/example/map';
 import ExamplePlugins from '@/vuepage/example/plugins';
 import ExampleTimeAxis from '@/vuepage/example/time-axis';
 import ExampleChart from '@/vuepage/example/chart';
+import ExampleComponent from '@/vuepage/example/component';
 
 export default [
   {
@@ -135,6 +136,20 @@ export default [
           {
             name: '轴型设计',
             url: '/example-chart',
+          },
+        ],
+      },
+      {
+        path: 'example-component',
+        component: ExampleComponent,
+        meta: [
+          {
+            name: '样例管理',
+            url: '/example-management',
+          },
+          {
+            name: '组件设计',
+            url: '/example-component',
           },
         ],
       },

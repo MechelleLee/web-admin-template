@@ -62,6 +62,10 @@ export default {
             alias: 'map',
           },
           {
+            name: '组件设计',
+            alias: 'component',
+          },
+          {
             name: '插件设计',
             alias: 'plugins',
           },

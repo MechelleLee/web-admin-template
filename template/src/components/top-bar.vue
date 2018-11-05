@@ -48,12 +48,15 @@ export default {
   },
 
   created() {},
+
   computed: {},
+
   methods: {
     changeRouter(url) {
       console.log(url);
       this.$router.push({ path: url });
     },
+
     signOut() {
       this.$router.push({ path: '/login' });
     },
