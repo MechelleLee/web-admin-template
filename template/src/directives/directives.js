@@ -7,15 +7,21 @@ import Vue from 'vue';
 Vue.directive('debounce', {
   inserted(el, binding) {
     let timer;
-
-    el.addEventListener('click', () => {
+    // eslint-disable-next-line
+    el.addEventListener('click', event => {
       if (timer) {
         clearTimeout(timer);
       }
 
       timer = setTimeout(() => {
-        binding.value();
+        binding.value(event);
       }, 300);
     });
   },
 });
+
+// Vue.directive('monitor', {
+//   inserted(el, binding) {
+//     el.addEventListener('', () => {});
+//   },
+// });
