@@ -1,8 +1,466 @@
-html,
+// 项目（基于 UI 设计）重置指定样式
+
+// 基于 CK-EDITOR 主题样式重置
+// :root {
+//   /*
+//   /* Overrides the border radius setting in the theme. */
+//   --ck-border-radius: 4px;
+
+//   /* Overrides the default font size in the theme. */
+//   --ck-font-size-base: 14px;
+
+//   /* Overrides the default font size in the theme. */
+//   --ck-line-height-base: 1.84615;
+//   --ck-font-size-normal: 1em;
+//   --ck-icon-size: calc(var(--ck-line-height-base) * var(--ck-font-size-normal));
+
+//   /* Helper variables to avoid duplication in the colors. */
+//   --ck-custom-background: #fafafa;
+//   --ck-custom-foreground: #fafafa;
+//   --ck-custom-border: #d9d9d9;
+//   --ck-custom-white: hsl(0, 0%, 100%);
+
+//   /* -- Overrides generic colors. ------------------------------------------------------------- */
+//   --ck-color-base-foreground: var(--ck-custom-background);
+//   --ck-color-focus-border: hsl(208, 90%, 62%);
+//   --ck-color-text: #333333;
+//   --ck-color-shadow-drop: hsla(0, 0%, 0%, 0.2);
+//   --ck-color-shadow-inner: hsla(0, 0%, 0%, 0.1);
+
+//   /* -- Overrides the default .ck-button class colors. ---------------------------------------- */
+//   --ck-color-button-default-background: var(--ck-custom-background);
+//   --ck-color-button-default-hover-background: #e6e6e6;
+//   --ck-color-button-default-active-background: #e6e6e6;
+//   --ck-color-button-default-active-shadow: #e6e6e6;
+//   --ck-color-button-default-disabled-background: var(--ck-custom-background);
+
+//   --ck-color-button-on-background: var(--ck-custom-foreground);
+//   --ck-color-button-on-hover-background: #e6e6e6;
+//   --ck-color-button-on-active-background: #e6e6e6;
+//   --ck-color-button-on-active-shadow: #e6e6e6;
+//   --ck-color-button-on-disabled-background: var(--ck-custom-foreground);
+
+//   --ck-color-button-action-background: hsl(168, 76%, 42%);
+//   --ck-color-button-action-hover-background: hsl(168, 76%, 38%);
+//   --ck-color-button-action-active-background: hsl(168, 76%, 36%);
+//   --ck-color-button-action-active-shadow: hsl(168, 75%, 34%);
+//   --ck-color-button-action-disabled-background: hsl(168, 76%, 42%);
+//   --ck-color-button-action-text: var(--ck-custom-white);
+
+//   --ck-color-button-save: hsl(120, 100%, 46%);
+//   --ck-color-button-cancel: hsl(15, 100%, 56%);
+
+//   /* -- Overrides the default .ck-dropdown class colors. -------------------------------------- */
+//   --ck-color-dropdown-panel-background: var(--ck-custom-background);
+//   --ck-color-dropdown-panel-border: var(--ck-custom-foreground);
+
+//   /* -- Overrides the default .ck-input class colors. ----------------------------------------- */
+//   --ck-color-input-background: var(--ck-custom-foreground);
+//   --ck-color-input-border: hsl(257, 3%, 43%);
+//   --ck-color-input-text: hsl(0, 0%, 98%);
+//   --ck-color-input-disabled-background: hsl(255, 4%, 21%);
+//   --ck-color-input-disabled-border: hsl(250, 3%, 38%);
+//   --ck-color-input-disabled-text: hsl(0, 0%, 46%);
+
+//   /* -- Overrides the default .ck-list class colors. ------------------------------------------ */
+//   --ck-color-list-background: var(--ck-custom-background);
+//   --ck-color-list-button-hover-background: var(--ck-color-base-foreground);
+//   --ck-color-list-button-on-background: var(--ck-color-base-active);
+//   --ck-color-list-button-on-background-focus: var(--ck-color-base-active-focus);
+//   --ck-color-list-button-on-text: var(--ck-color-base-background);
+
+//   /* -- Overrides the default .ck-balloon-panel class colors. --------------------------------- */
+//   --ck-color-panel-background: var(--ck-custom-background);
+//   --ck-color-panel-border: var(--ck-custom-border);
+
+//   /* -- Overrides the default .ck-toolbar class colors. --------------------------------------- */
+//   --ck-color-toolbar-background: var(--ck-custom-background);
+//   --ck-color-toolbar-border: var(--ck-custom-border);
+
+//   /* -- Overrides the default .ck-tooltip class colors. --------------------------------------- */
+//   --ck-color-tooltip-background: hsl(252, 7%, 14%);
+//   --ck-color-tooltip-text: hsl(0, 0%, 93%);
+
+//   /* -- Overrides the default colors used by the ckeditor5-image package. --------------------- */
+//   --ck-color-image-caption-background: hsl(0, 0%, 97%);
+//   --ck-color-image-caption-text: hsl(0, 0%, 20%);
+
+//   /* -- Overrides the default colors used by the ckeditor5-widget package. -------------------- */
+//   --ck-color-widget-blurred-border: hsl(0, 0%, 87%);
+//   --ck-color-widget-hover-border: hsl(43, 100%, 68%);
+//   --ck-color-widget-editable-focus-background: var(--ck-custom-white);
+
+//   /* -- Overrides the default colors used by the ckeditor5-link package. ---------------------- */
+//   --ck-color-link-default: hsl(190, 100%, 75%);
+// }
+
+.ck.ck-icon {
+  width: var(--ck-icon-size);
+  height: var(--ck-icon-size);
+  font-size: 0.8333350694em;
+  will-change: transform;
+}
+
+.ck.ck-toolbar__separator {
+  width: 1px;
+  display: inline-block;
+}
+
+.ck.ck-dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.ck.ck-dropdown .ck-dropdown__panel {
+  position: absolute;
+}
+
+.ck.ck-balloon-panel {
+  position: absolute;
+}
+
+// 基于 normalize.css 解决浏览器的样式差异
+
+/*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */
+
+/* Document
+   ========================================================================== */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/* Sections
+   ========================================================================== */
+
+/**
+ * Remove the margin in all browsers.
+ */
+
 body {
-  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
-  padding: 0;
-  border: 0;
   margin: 0;
-  box-sizing: border-box;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+
+a {
+  background-color: transparent;
+}
+
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove the border on images inside links in IE 10.
+ */
+
+img {
+  border-style: none;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+
+button,
+input {
+  /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+
+button,
+select {
+  /* 1 */
+  text-transform: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  -webkit-appearance: button;
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+
+button::-moz-focus-inner,
+[type='button']::-moz-focus-inner,
+[type='reset']::-moz-focus-inner,
+[type='submit']::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+
+button:-moz-focusring,
+[type='button']:-moz-focusring,
+[type='reset']:-moz-focusring,
+[type='submit']:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+
+progress {
+  vertical-align: baseline;
+}
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+
+[type='checkbox'],
+[type='radio'] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+
+[type='number']::-webkit-inner-spin-button,
+[type='number']::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type='search'] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+
+[type='search']::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+
+details {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+  display: list-item;
+}
+
+/* Misc
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 10+.
+ */
+
+template {
+  display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+
+[hidden] {
+  display: none;
 }

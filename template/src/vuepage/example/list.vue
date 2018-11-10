@@ -1,30 +1,33 @@
 <template>
   <section class="container">
-    <table-pagination
+    <dankal-table
       :config="config"
       :datasource="datasource"
-      @change-page="handlerPageChange">
+      @change-page="handlerPageChange"
+    >
       <el-table-column
         slot="action"
         fixed="right"
         label="操作"
         width="285"
-        align="center">
+        align="center"
+      >
         <template slot-scope="scope">
           <div>
             <el-button
               type="primary"
               plain
-              @click="handlerNavigator(scope)">详情</el-button>
+              @click="handlerNavigator(scope)"
+            >详情</el-button>
           </div>
         </template>
       </el-table-column>
-    </table-pagination>
+    </dankal-table>
   </section>
 </template>
 
 <script>
-import TablePagination from '@/components/table-pagination';
+import DankalTable from '@/components/table/dankal-table';
 
 export default {
   data() {
@@ -35,7 +38,7 @@ export default {
         fields: [
           {
             prop: 'name',
-            label: '名称',
+            label: '组件设计',
           },
         ],
       },
@@ -43,8 +46,36 @@ export default {
         total: 1,
         data: [
           {
-            name: '富文本编辑器',
+            name: '文本设计',
             alias: 'editor',
+          },
+          {
+            name: '表单设计',
+            alias: 'form',
+          },
+          {
+            name: '树形设计',
+            alias: 'tree',
+          },
+          {
+            name: '地图选址',
+            alias: 'map',
+          },
+          {
+            name: '组件设计',
+            alias: 'component',
+          },
+          {
+            name: '插件设计',
+            alias: 'plugins',
+          },
+          {
+            name: '轴型设计',
+            alias: 'time-axis',
+          },
+          {
+            name: '图表设计',
+            alias: 'chart',
           },
         ],
       },
@@ -52,7 +83,7 @@ export default {
   },
 
   components: {
-    TablePagination,
+    DankalTable,
   },
 
   mounted() {},
@@ -79,5 +110,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.container {
+  height: var(--dankal-body-height);
+}
 </style>

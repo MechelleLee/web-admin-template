@@ -1,18 +1,5 @@
 <template>
   <el-container class="full-height bg-gray">
-    <el-header
-      class="no-padding"
-      style="height:73px">
-      <top-bar>
-        <div slot="filter">
-          <el-input placeholder="请输入手机号码、用户名">
-            <el-button
-              slot="append"
-              icon="el-icon-search"/>
-          </el-input>
-        </div>
-      </top-bar>
-    </el-header>
     <el-main class="page-content">
       <dk-table
         :data="tableData"
@@ -38,6 +25,7 @@
 </template>
 
 <script>
+
 import dkTable from '../../components/dk-table';
 
 export default {
@@ -48,6 +36,11 @@ export default {
   },
   components: {
     dkTable,
+  },
+  computed: {
+    name() {
+      return this.$store.state.users.name
+    },
   },
   data() {
     return {

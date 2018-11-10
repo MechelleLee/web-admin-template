@@ -3,51 +3,71 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
   },
   env: {
     browser: true,
   },
   // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
   // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
-  extends: ['plugin:vue/essential', 'airbnb-base','plugin:vue/strongly-recommended'],
+  extends: ['plugin:vue/essential', 'airbnb-base', 'plugin:vue/strongly-recommended'],
   // required to lint *.vue files
-  plugins: [
-    'vue'
-  ],
+  plugins: ['vue'],
   // check if imports actually resolve
   settings: {
     'import/resolver': {
       webpack: {
-        config: 'build/webpack.base.conf.js'
-      }
-    }
+        config: 'build/webpack.base.conf.js',
+      },
+    },
   },
   // add your custom rules here
   rules: {
-    "linebreak-style": 0,
+    'linebreak-style': 0,
     // don't require .vue extension when importing
-    'import/extensions': ['error', 'always', {
-      js: 'never',
-      vue: 'never'
-    }],
-    'semi':0,
+    'import/extensions': [
+      'error',
+      'always',
+      {
+        js: 'never',
+        vue: 'never',
+      },
+    ],
+    semi: 0,
     // disallow reassignment of function parameters
     // disallow parameter object manipulation except for specific exclusions
-    'no-param-reassign': ['error', {
-      props: true,
-      ignorePropertyModificationsFor: [
-        'state', // for vuex state
-        'acc', // for reduce accumulators
-        'e' // for e.returnvalue
-      ]
-    }],
+    'no-param-reassign': [
+      'error',
+      {
+        props: true,
+        ignorePropertyModificationsFor: [
+          'state', // for vuex state
+          'acc', // for reduce accumulators
+          'e', // for e.returnvalue
+        ],
+      },
+    ],
     // allow optionalDependencies
-    'import/no-extraneous-dependencies': ['error', {
-      optionalDependencies: ['test/unit/vue-filiter.js']
-    }],
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        optionalDependencies: ['test/unit/vue-filiter.js'],
+      },
+    ],
+    // 配置属性换行
+    'vue/max-attributes-per-line': [
+      1,
+      {
+        singleline: 3,
+        multiline: {
+          max: 3,
+          allowFirstLine: false,
+        },
+      },
+    ],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off'
-  }
-}
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'max-len': 'off'
+  },
+};

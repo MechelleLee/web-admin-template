@@ -1,14 +1,6 @@
 
 const list = [
   {
-    name: '权限管理',
-    menuItem: {
-      name: '权限管理',
-      iconClass: 'dk-icon-order',
-      route: '/authority-management',
-    },
-  },
-  {
     name: '样例管理',
     menuItem: {
       name: '样例管理',
@@ -17,11 +9,19 @@ const list = [
     },
   },
   {
-    name: '会员管理',
+    name: '批量下载',
     menuItem: {
-      name: '会员管理',
-      iconClass: '',
-      route: '',
+      name: '批量下载',
+      iconClass: 'el-icon-download',
+      route: '/example-management/multiple-download',
+    },
+  },
+  {
+    name: '操作权限控制',
+    menuItem: {
+      name: '操作权限控制',
+      iconClass: 'el-icon-setting',
+      route: '/example-management/operation',
     },
   },
 ]

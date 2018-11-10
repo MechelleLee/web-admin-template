@@ -1,0 +1,4 @@
+# Ignore IDE's File About Config
+.idea
+.vscode
+
