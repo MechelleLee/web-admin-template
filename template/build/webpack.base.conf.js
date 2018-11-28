@@ -3,6 +3,7 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const AutodllWebpackPlugin = require('autodll-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -77,6 +78,27 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new AutodllWebpackPlugin({
+      inject: true, // will inject the DLL bundles to index.html
+      filename: '[name]_[hash].js',
+      path: './dll',
+      entry: {
+        vendor: [
+          'vue',
+          'vue-router',
+          'vuex',
+          'vuex-persistedstate',
+          'element-ui',
+          'axios',
+          'crypto-js',
+          'jszip',
+          'nprogress',
+          'quill',
+        ]
+      }
+    })
+  ],
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
     // source contains it (although only uses it if it's native).
