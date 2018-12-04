@@ -170,13 +170,14 @@ export default {
     }
     .main {
       flex: 1;
-      padding: 147px 0 138px 0;
-      background: url(../assets/images/backgrou-img.jpg) center center fixed;
+      background: url(../assets/images/backgrou-img.png) center center fixed;
       background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       .login-box {
         width: 371px;
         height: 341px;
-        margin: auto auto;
         background-color: #ffffff;
         .title-box-login {
           background: url(../assets/images/Oval_Copy_3@3x.png)  no-repeat;
