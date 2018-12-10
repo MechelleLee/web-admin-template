@@ -1,4 +1,4 @@
 import Vue from 'vue';
-import { ImageDomain } from '../configs/env';
+import { imgDomain } from '../configs/env';
 
-Vue.filter('imgMapper', value => ImageDomain + value);
+Vue.filter('imgMapper', value => imgDomain + value);

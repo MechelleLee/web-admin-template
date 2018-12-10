@@ -34,4 +34,13 @@ export default {
 
     document.cookie = `${cname}=${cvalue}; ${expires}; path=${path}`;
   },
+  downloadBlobFile(blob) {
+    const downloadUrl = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = downloadUrl;
+    a.download = 'qrcode.zip';
+    document.body.appendChild(a);
+    a.click();
+    URL.revokeObjectURL(downloadUrl);
+  },
 };

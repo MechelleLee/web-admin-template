@@ -20,3 +20,23 @@
     center center;
   @include dk-icon;
 }
+.dk-icon-download {
+  background: url('assets/images/menu-icon/ic_download.png') no-repeat
+  center center;
+  @include dk-icon;
+}
+.dk-icon-download-active {
+  background: url('assets/images/menu-icon/ic_download_highlight.png') no-repeat
+  center center;
+  @include dk-icon;
+}
+.dk-icon-auth {
+  background: url('assets/images/menu-icon/ic_auth.png') no-repeat
+  center center;
+  @include dk-icon;
+}
+.dk-icon-auth-active {
+  background: url('assets/images/menu-icon/ic_auth_highlight.png') no-repeat
+  center center;
+  @include dk-icon;
+}

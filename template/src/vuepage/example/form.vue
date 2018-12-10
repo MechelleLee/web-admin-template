@@ -158,7 +158,7 @@ export default {
       length: 10,
       group: [],
       limit: 10,
-      accept: ['image/png', 'image/jpeg'],
+      accept: ['image/*'],
       token: '',
       domain: '',
       images: [],

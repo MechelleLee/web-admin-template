@@ -30,9 +30,9 @@ export const pms2MenuList = (permissionList) => {
   return sideMemuList
 }
 
-export const encrypt = (data, secret = 'Danakl123') => CryptoJS.AES.encrypt(data, secret)
+export const encrypt = (data, secret = 'Dankal123') => CryptoJS.AES.encrypt(data, secret)
 
-export const decrypt = (encryptedData, secret = 'Danakl123') => {
+export const decrypt = (encryptedData, secret = 'Dankal123') => {
   const bytes = CryptoJS.AES.decrypt(encryptedData.toString(), secret);
   const plaintext = bytes.toString(CryptoJS.enc.Utf8);
   return plaintext

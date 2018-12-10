@@ -12,7 +12,7 @@ const list = [
     name: '批量下载',
     menuItem: {
       name: '批量下载',
-      iconClass: 'el-icon-download',
+      iconClass: 'dk-icon-download',
       route: '/example-management/multiple-download',
     },
   },
@@ -20,7 +20,7 @@ const list = [
     name: '操作权限控制',
     menuItem: {
       name: '操作权限控制',
-      iconClass: 'el-icon-setting',
+      iconClass: 'dk-icon-auth',
       route: '/example-management/operation',
     },
   },
