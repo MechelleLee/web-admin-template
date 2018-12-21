@@ -8,8 +8,8 @@
           v-for="(item, index) in $route.meta"
           :key="index">
           <span
-            @click="changeRouter(item.url)">
-            \{{ item.name }}
+            @click="changeRouter(item.url,index)">
+            {{ item.name }}
           </span>
         </el-breadcrumb-item>
       </el-breadcrumb>
@@ -49,9 +49,11 @@ export default {
   created() {},
   computed: {},
   methods: {
-    changeRouter(url) {
-      console.log(url);
-      this.$router.push({ path: url });
+    changeRouter(url, index) {
+      if (index) {
+        console.log(url);
+        this.$router.push({ path: url });
+      }
     },
     signOut() {
       this.$router.push({ path: '/login' })

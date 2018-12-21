@@ -11,12 +11,16 @@ export default [
     component: Container,
     children: [
       {
-        path: '',
+        path: 'example-list',
         component: ExampleList,
         meta: [
           {
             name: '样例管理',
             url: '/example-management',
+          },
+          {
+            name: '/xx列表',
+            url: 'example-list',
           },
         ],
       },
@@ -29,8 +33,12 @@ export default [
             url: '/example-management',
           },
           {
+            name: 'xx列表',
+            url: 'example-list',
+          },
+          {
             name: '富文本编辑',
-            url: '',
+            url: 'example-editor',
           },
         ],
       },
@@ -58,7 +66,7 @@ export default [
           },
           {
             name: '操作权限控制',
-            url: '/operation',
+            url: 'operation',
           },
         ],
       },

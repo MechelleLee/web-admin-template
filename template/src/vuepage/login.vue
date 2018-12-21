@@ -82,6 +82,17 @@ export default {
             {
               name: '操作权限控制',
             },
+            {
+              name: 'xx列表',
+            },
+          ],
+        },
+        {
+          name: '商品管理',
+          children: [
+            {
+              name: '商品详情',
+            },
           ],
         },
       ],
