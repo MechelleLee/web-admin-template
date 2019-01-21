@@ -3,7 +3,7 @@
     :index="data.route">
     <template slot="title">
       <i :class="data , $route.path | transIcon"/>
-      <span>{{ data.name }}</span>
+      <span>\{{ data.name }}</span>
     </template>
     <el-menu-item
       :index="child.route"
@@ -11,7 +11,7 @@
       v-for="child in data.children"
     >
       <i :class="child,$route.meta | transIcon"/>
-      <span slot="title">{{ child.name }}</span>
+      <span slot="title">\{{ child.name }}</span>
     </el-menu-item>
   </el-submenu>
 </template>

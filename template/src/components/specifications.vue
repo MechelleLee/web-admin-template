@@ -17,7 +17,7 @@
       class="el-form-item"
       v-for="(item,index) in Arr"
       :key="index">
-      <span class="el-form-item__label">{{ item.specificationsTitle }}</span>
+      <span class="el-form-item__label">\{{ item.specificationsTitle }}</span>
       <el-input
         class="el-input-mini"
         placeholder="请输入内容"

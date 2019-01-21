@@ -9,7 +9,7 @@
           :key="index">
           <span
             @click="changeRouter(item.url,index)">
-            {{ item.name }}
+            \{{ item.name }}
           </span>
         </el-breadcrumb-item>
       </el-breadcrumb>
