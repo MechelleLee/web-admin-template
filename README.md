@@ -1,33 +1,46 @@
 # Dankal 后台管理模板 （基于 element 实现）
 
-### 项目简介
+## 框架目录说明
 
-该项目是一个后台管理模板，是基于 element 实现的。主要用于解决后台管理中的组件复用，element 未涉及的 JSSDK 集成，和为 CSS 模块化提供解决的思路
-
-### 贡献代码的步骤
-
-- 在贡献代码之前，你需要可以先阅览该项目的代码。如果你认为你想参加到这个项目的贡献中来，项目的地址：https://github.com/szdankal/web-admin-template.git
-
-- 你需要 fork 该项目到自己的 github 中
-
-- 在 fork 完成之后，你需要执行以下命令,将项目克隆到你的本地
-
-```shell
-git clone https://github.com/szdankal/web-admin-template.git
+```cmd
+├── build     #webpack配置
+├── config    #webpack配置
+├── src
+│   ├── api     #api接口
+│   ├── assets  #资源文件
+│   │   ├── images  #图片
+│   │   └── styles  #样式
+│   │       └── element  #复写element-ui样式
+│   ├── components   #只存放全局组件！
+│   │   └── side-bar
+│   ├── config       #全局配置文件
+│   ├── filters      #全局过滤器
+│   ├── jslib        #本地类库集合
+│   ├── router       #路由配置
+│   ├── vuepage      #页面
+│   │   ├── authority
+│   │   └── example
+│   └── vuex       #全局状态管理
+│       └── modules
+│           └── authority
+└── static       #特殊静态资源
 ```
 
-- 在 clone 完成之后，你便可以编写这个项目了，需要注意的是我们通常都是在 dev 分支开发，你还要执行以下的步骤
+## 特别注意事项！
 
-```shell
-cd web-admin-template
+- 请注意 route.js 导入 Vue 组件的路径大小写问题, 如果 vue 页面在目录命名是大写,import 时也必须是大写。否则会引起服务器打包构建失败。
+- 如果需要在 npm 仓库添加插件时,请务必使用 npm -S 命令保证 package.json 文件有添加相关依赖
 
-git checkout -b dev origin/dev
+### 权限设计说明
 
-# 建议你使用 yarn 来完成 node_modules 的安装，同样的你可以使用 npm install，但是我并不建议你这样操作
-yarn install
+- 使用 vuex 和 component 动态组件来加载对应的权限模块
+- 同时需要在初始化权限的时候同时初始化对应的路由模块
+- 由于是后台管理的缘故， 基本上都是在 Login.vue 里面初始路由
 
-# 或是 npm run dev
-yarn dev
-```
+### 组件设计说明
 
-- 完成这些步骤，你便可以愉快的开发了。那么在开发完成，你要向我们贡献代码，那你最好要了解什么是[PUll REQUEST](https://help.github.com/articles/about-pull-requests/), 这样我们才能收到你的代码呢
+> 设计方式
+
+### CSS 设计说明
+
+> 设计方式

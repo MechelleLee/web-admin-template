@@ -1,5 +1,6 @@
-/template/build/
-/template/config/
+/build/
+/config/
 /dist/
+/*.js
 /test/unit/coverage/
 /src/jslib/verify-code.min.js
